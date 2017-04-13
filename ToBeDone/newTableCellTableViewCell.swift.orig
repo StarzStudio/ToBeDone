@@ -1,0 +1,86 @@
+//
+//  newTableCellTableViewCell.swift
+//  ToBeDone
+//
+//  Created by 周星 on 12/4/16.
+//  Copyright © 2016 周星. All rights reserved.
+//
+//
+import UIKit
+
+class newTableCellTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var containerView: UIView!
+    var item: TodoItem!
+    
+    var collectonCellViewController : CollectionCellViewController!
+    
+<<<<<<< Updated upstream
+
+    var collectionCellViewWithNoPhoto: CollectionCellViewWithNoPhoto!
+
+=======
+    
+    var collectionCellViewWithNoPhoto: CollectionCellViewWithNoPhoto!
+    
+>>>>>>> Stashed changes
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+        //if self.item.images != 0{
+<<<<<<< Updated upstream
+            collectonCellViewController = CollectionCellViewController(nibName: "CollectionCellView", bundle: nil)
+            //collectonCellViewController.item = self.item
+            containerView = collectonCellViewController.view
+        
+        /*}
+        else{*/
+            
+        /*collectionCellViewWithNoPhoto = Bundle.main.loadNibNamed("CollectionCellWithNoPhoto", owner: nil, options: nil)?.first as? CollectionCellViewWithNoPhoto
+        
+            //collectionCellViewWithNoPhoto.item = self.item
+            containerView = collectionCellViewWithNoPhoto*/
+        //}
+       
+=======
+        collectonCellViewController = CollectionCellViewController(nibName: "CollectionCellView", bundle: nil)
+        //collectonCellViewController.item = self.item
+        containerView = collectonCellViewController.view
+        
+        /*}
+         else{*/
+        
+        /*collectionCellViewWithNoPhoto = Bundle.main.loadNibNamed("CollectionCellWithNoPhoto", owner: nil, options: nil)?.first as? CollectionCellViewWithNoPhoto
+         
+         //collectionCellViewWithNoPhoto.item = self.item
+         containerView = collectionCellViewWithNoPhoto*/
+        //}
+        
+>>>>>>> Stashed changes
+        
+        // add data to the collectonCellViewController
+        
+    }
+    
+<<<<<<< Updated upstream
+   
+=======
+    
+
+
+>>>>>>> Stashed changes
+
+    
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    
+
+    
+}
+

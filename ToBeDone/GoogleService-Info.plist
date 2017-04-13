@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>980475534087-5mh1dvuk11dg57nfsu4b39uf3kclbf5t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.980475534087-5mh1dvuk11dg57nfsu4b39uf3kclbf5t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCLI9zf-_-Hy8ynErDFZ1VokIBc_On3igE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>980475534087</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Xinghe.ToBeDone</string>
+	<key>PROJECT_ID</key>
+	<string>tobedone-97750</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tobedone-97750.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:980475534087:ios:4df1d2b29686e992</string>
+	<key>DATABASE_URL</key>
+	<string>https://tobedone-97750.firebaseio.com</string>
+</dict>
+</plist>
