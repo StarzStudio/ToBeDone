@@ -15,6 +15,24 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
+class Debug: NSObject{
+    
+    // TODO: 为调试修改
+    
+    private static let debug = true
+    
+    class func log (message: String,
+                    file: String = #file,
+                    method: String = #function,
+                    line: Int = #line)
+    {
+        print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+    }
+    
+    
+}
+
+
 
 // utility functions about date
 class DateUtility {
@@ -30,7 +48,7 @@ class DateUtility {
         let scheduledDate = Date.init(timeIntervalSinceNow: secondsSinceToday)
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = customDateFormat
-        //dateformatter.dateStyle = .medium
+        //w = .medium
         //dateformatter.timeStyle = .short
         
         return dateformatter.string(from: scheduledDate)

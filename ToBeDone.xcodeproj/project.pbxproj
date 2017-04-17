@@ -63,6 +63,10 @@
 		D98C12411DECF1E600CD89C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12401DECF1E600CD89C0 /* MainViewController.swift */; };
 		D98C12431DECF28700CD89C0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12421DECF28700CD89C0 /* MenuViewController.swift */; };
 		D98C12451DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12441DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift */; };
+		D991F4391EA515F500C0F853 /* locationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991F4351EA515F500C0F853 /* locationButton.swift */; };
+		D991F43A1EA515F500C0F853 /* ItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991F4361EA515F500C0F853 /* ItemState.swift */; };
+		D991F43B1EA515F500C0F853 /* dateTimeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991F4371EA515F500C0F853 /* dateTimeButton.swift */; };
+		D991F43C1EA515F500C0F853 /* alertTimeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991F4381EA515F500C0F853 /* alertTimeButton.swift */; };
 		D9A1AA811DF2452B0074974C /* PinSelectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A1AA801DF2452B0074974C /* PinSelectionMenuItem.swift */; };
 		D9A1AA831DF245460074974C /* PinSelectionMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A1AA821DF245460074974C /* PinSelectionMenuItem.xib */; };
 		D9A1AA871DF24AB20074974C /* RKCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A1AA861DF24AB20074974C /* RKCustomButton.m */; };
@@ -151,6 +155,10 @@
 		D98C12401DECF1E600CD89C0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D98C12421DECF28700CD89C0 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D98C12441DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCellViewTableViewCell.swift; sourceTree = "<group>"; };
+		D991F4351EA515F500C0F853 /* locationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationButton.swift; sourceTree = "<group>"; };
+		D991F4361EA515F500C0F853 /* ItemState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemState.swift; sourceTree = "<group>"; };
+		D991F4371EA515F500C0F853 /* dateTimeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateTimeButton.swift; sourceTree = "<group>"; };
+		D991F4381EA515F500C0F853 /* alertTimeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alertTimeButton.swift; sourceTree = "<group>"; };
 		D9A1AA801DF2452B0074974C /* PinSelectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSelectionMenuItem.swift; sourceTree = "<group>"; };
 		D9A1AA821DF245460074974C /* PinSelectionMenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinSelectionMenuItem.xib; sourceTree = "<group>"; };
 		D9A1AA851DF24AB20074974C /* RKCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKCustomButton.h; sourceTree = "<group>"; };
@@ -513,6 +521,10 @@
 		D9CEBC851DC54C3300003C44 /* ItemDetail */ = {
 			isa = PBXGroup;
 			children = (
+				D991F4351EA515F500C0F853 /* locationButton.swift */,
+				D991F4361EA515F500C0F853 /* ItemState.swift */,
+				D991F4371EA515F500C0F853 /* dateTimeButton.swift */,
+				D991F4381EA515F500C0F853 /* alertTimeButton.swift */,
 				D9079D931DDCC41F0019D72E /* Unused */,
 				D9079D921DDCC40C0019D72E /* Component */,
 				D9CEBC711DC54AF300003C44 /* ItemDetail.storyboard */,
@@ -604,6 +616,7 @@
 				D92DC80C1DC544B200744BCC /* Resources */,
 				593A512BA5800BDA6E68B9E9 /* [CP] Embed Pods Frameworks */,
 				CB90D1AB313F8ACDA2B776DB /* [CP] Copy Pods Resources */,
+				D991F4341EA515AF00C0F853 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -739,6 +752,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToBeDone/Pods-ToBeDone-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D991F4341EA515AF00C0F853 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -757,11 +783,15 @@
 				3BD8340F1DF670430014A7DB /* userDetailsViewController.swift in Sources */,
 				D9079DA41DDCF2330019D72E /* Int+Timepiece.swift in Sources */,
 				D9A1AA8D1DF261510074974C /* CollectionCellViewWithNoPhoto.swift in Sources */,
+				D991F4391EA515F500C0F853 /* locationButton.swift in Sources */,
 				D9079DA21DDCF2330019D72E /* Date+Timepiece.swift in Sources */,
 				D9079DA31DDCF2330019D72E /* DateComponents+Timepiece.swift in Sources */,
 				D98B04141DEA892200A1E7E1 /* IGListImageModel.swift in Sources */,
 				D9079DB21DDF65790019D72E /* IGListImageSetCell.swift in Sources */,
+				D991F43B1EA515F500C0F853 /* dateTimeButton.swift in Sources */,
+				D991F43A1EA515F500C0F853 /* ItemState.swift in Sources */,
 				3B2D5DFD1DF6F0D700BC60FE /* ProfileCell.swift in Sources */,
+				D991F43C1EA515F500C0F853 /* alertTimeButton.swift in Sources */,
 				D9505ED51DD2771900ED1299 /* MainView+Segue.swift in Sources */,
 				D9CEBC661DC54A5800003C44 /* Utility.swift in Sources */,
 				D9CEBC791DC54BD300003C44 /* DefaultItemCell.swift in Sources */,

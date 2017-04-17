@@ -38,6 +38,8 @@ target 'ToBeDone' do
     pod 'FlatUIKit'
     pod 'MKDropdownMenu'
     
+    # lint to enforce Swift style
+    pod 'SwiftLint'
     post_install do |installer|
         installer.pods_project.targets.each do |target|
             target.build_configurations.each do |config|
