@@ -46,16 +46,16 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
     var alertDate : Date?
     var datePicker = DatePickerDialog()
     var alertView = AlertView()
-    var item : TodoItem! = TodoItem()
-    var itemStore = TodoItemStore.sharedInstance
+    
+    var itemState : ItemState
     let locationManager = LocationManager.sharedInstance
     var mapView = MapViewController()
     var isNewAddingItem = true
-    var db = TodoItemStore.sharedInstance.getDB()!
+    
     var dropDownMenu : MKDropdownMenu!
     var dateTimeButton: UIButton!
     var alertButton: UIButton!
-      var addPictureButton: UIButton!
+    var addPictureButton: UIButton!
     var dateTimeImage : UIImageView!
     var alertImage : UIImageView!
     var addPhotoImage : UIImageView!
@@ -69,9 +69,9 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
     @IBOutlet weak var tagList : RKTagsView!
     @IBOutlet weak var itemNote : FloatLabelTextView!
     @IBOutlet weak var IGListImageSet: IGListCollectionView!
-    @IBOutlet weak var  locationButton : imgLeftTitleRightButton!
+    @IBOutlet weak var locationButton : imgLeftTitleRightButton!
     @IBOutlet weak var subTasksTable: UITableView!
-      @IBOutlet weak var confirmBotton : UIButton!
+    @IBOutlet weak var confirmBotton : UIButton!
     @IBOutlet weak var itemTitle: FloatLabelTextField!
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var alertTimeLabel: UILabel!
@@ -159,19 +159,12 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
         weak var weakSelf = self
         locationManager.getCurrentPlaceName(placeNameDisplayMode: .concise) { (generatedPlaceName) -> Void in
            
-            placeName = generatedPlaceName!
-    
-            if weakSelf!.isNewAddingItem == true {
-               weakSelf!.locationButton.setTitle(newTitle: placeName)
-               // weakSelf!.locationButton.setTitle(newTitle: "Syracuse")
-                weakSelf!.item.location = placeName
-                
+            if let placeName = generatedPlaceName {
+                weakSelf!.locationButton.setTitle(newTitle: placeName)
+                // weakSelf!.locationButton.setTitle(newTitle: "Syracuse")
+                weakSelf!.itemState.itemLocation = placeName
             }
-            else {
-                // don't update if this is not new adding item
-                weakSelf!.locationButton.setTitle(newTitle:placeName)
-            }
-           
+
         }
     }
     
@@ -496,6 +489,8 @@ extension ItemDetailViewController : UIImagePickerControllerDelegate, UINavigati
         
     }
     
+    
+    
      override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if self.itemTitle.isFirstResponder  == true {
             self.itemTitle.resignFirstResponder()
@@ -507,6 +502,8 @@ extension ItemDetailViewController : UIImagePickerControllerDelegate, UINavigati
     
     
 }
+
+
 extension ItemDetailViewController : UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -575,30 +572,7 @@ extension ItemDetailViewController: UITextViewDelegate {
     }
 }
 
-extension ItemDetailViewController: TagListViewDelegate {
-    
-//    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-//        alertToDeleteTag(tagName: title)
-//    }
-//    
-//    fileprivate func alertToDeleteTag (tagName: String) {
-//        let alertController = UIAlertController(title: "Delete tag",
-//                                                message: "Are you sure to delete this tag?", preferredStyle: UIAlertControllerStyle.alert)
-//        let cancelAction = UIAlertAction(title: "No",
-//                                         style: UIAlertActionStyle.cancel,
-//                                         handler: nil)
-//        
-//        let confirmAction = UIAlertAction(title:"Yes", style: UIAlertActionStyle.destructive) { (UIAlertAction) -> Void in
-//            self.tagList.removeTag(tagName)
-//        }
-//        
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(confirmAction)
-//        self.present(alertController, animated: true, completion: nil)
-//        
-//    }
 
-}
 
 extension ItemDetailViewController: RKTagsViewDelegate {
     func tagsView(_ tagsView: RKTagsView, buttonForTagAt index: Int) -> UIButton  {
@@ -618,12 +592,12 @@ extension ItemDetailViewController {
     {
 //        print("ItemDetailViewController item id: \(item.id)")
 //           print("ItemDetailViewController In item fileurl: \(item.images[0].fileURL)")
-     self.itemNote.text = item.note
+        self.itemNote.text = item.note
         self.itemTitle.text =  item.title
         if let date = item.scheduledDate {
             self.dueDateLabel.text = date
             self.dueDateLabel.isHidden = false
-              self.dueDateImage.isHidden = false
+            self.dueDateImage.isHidden = false
         }
         
         if let date = item.alertDate {
@@ -936,10 +910,9 @@ extension ItemDetailViewController: MKDropdownMenuDelegate,MKDropdownMenuDataSou
     // MARK: - addPhotoButton
     fileprivate func setAddPictureButton () {
         
-        
         addPictureButton.setTitle("Picture", for: .normal)
-       addPhotoImage.image = UIImage(named:"addPicture_itemDetail")
-       addPhotoImage.contentMode = .scaleAspectFit
+        addPhotoImage.image = UIImage(named:"addPicture_itemDetail")
+        addPhotoImage.contentMode = .scaleAspectFit
         self.addPictureButton.addTarget(self, action: #selector(self.tapAddPictureButton) , for: .touchUpInside)
         
     }

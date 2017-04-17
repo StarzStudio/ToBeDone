@@ -28,9 +28,9 @@ class LocationManager : NSObject , CLLocationManagerDelegate{
     static let sharedInstance = LocationManager()
     
     var locationManager : CLLocationManager! = CLLocationManager()
-     var lat : Double = 0.0
-     var lng : Double = 0.0
-     var place : String = ""
+    var lat : Double = 0.0
+    var lng : Double = 0.0
+    var place : String = ""
     var mode: placeNameDisplayMode! = .concise
     
     typealias getPlaceHandler = (String?) -> ()

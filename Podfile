@@ -15,11 +15,11 @@ target 'ToBeDone' do
     #pod 'Firebase/RemoteConfig'
     #firebase
     
-    pod 'Eureka', '~> 2.0.0-beta.1'
+    
     pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     #pod 'Popover'
-    #pod 'AZExpandableIconListView'
+    
     pod 'TRMosaicLayout'
     pod 'FoldingCell’, '~> 2.0.1'
     pod 'M13Checkbox'
@@ -38,6 +38,8 @@ target 'ToBeDone' do
     pod 'FlatUIKit'
     pod 'MKDropdownMenu'
     
+    # lint to enforce Swift style
+    pod 'SwiftLint'
     post_install do |installer|
         installer.pods_project.targets.each do |target|
             target.build_configurations.each do |config|

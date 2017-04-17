@@ -32,7 +32,7 @@ class TodoItemStore {
     public func query(stateName: String, property:String ) -> Results<TodoItem>! {
     
         let state = "state == \(stateName)"
-        return  db.objects(TodoItem.self).filter(state).sorted(byProperty: property)
+        return  db.objects(TodoItem.self).filter(state).sorted(byKeyPath: property)
     }
     
     
@@ -48,9 +48,6 @@ class TodoItemStore {
         }
     }
     
-    public func getDB() ->Realm!{
-        return db
-    }
     
     public func delete(item: TodoItem){
         try! db.write {
@@ -75,13 +72,6 @@ class TodoItemStore {
         }
         
     }
-    
-//    public func delete(publicitemID: UInt64) {
-//    
-//    }
-//    public func update(item: TodoItem) {
-//    
-//    }
     
 
 

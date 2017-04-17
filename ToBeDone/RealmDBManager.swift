@@ -23,7 +23,7 @@ class RealmDBManager {
             db = try! Realm() // Create realm pointing to default file
         }
         return db!
-}
+    }
     
     
     public func deleteDBFile() {

@@ -43,12 +43,6 @@
 		D961590E1DF4CCB800739982 /* newTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D961590D1DF4CCB800739982 /* newTableCell.swift */; };
 		D963FA901DD7AEBB001E29BB /* FloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA8E1DD7AEBB001E29BB /* FloatLabelTextField.swift */; };
 		D963FA911DD7AEBB001E29BB /* FloatLabelTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA8F1DD7AEBB001E29BB /* FloatLabelTextView.swift */; };
-		D963FA991DD7B6B2001E29BB /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA931DD7B6B2001E29BB /* LocationCell.swift */; };
-		D963FA9A1DD7B6B2001E29BB /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D963FA941DD7B6B2001E29BB /* LocationCell.xib */; };
-		D963FA9B1DD7B6B2001E29BB /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA951DD7B6B2001E29BB /* LocationModel.swift */; };
-		D963FA9C1DD7B6B2001E29BB /* SubTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA961DD7B6B2001E29BB /* SubTaskModel.swift */; };
-		D963FA9D1DD7B6B2001E29BB /* SubTaskTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D963FA971DD7B6B2001E29BB /* SubTaskTableCell.swift */; };
-		D963FA9E1DD7B6B2001E29BB /* SubTaskTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D963FA981DD7B6B2001E29BB /* SubTaskTableCell.xib */; };
 		D974FDFF1DCE41F100428612 /* about_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D974FDFA1DCE41F100428612 /* about_menu.png */; };
 		D974FE001DCE41F100428612 /* hamburger_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D974FDFB1DCE41F100428612 /* hamburger_menu.png */; };
 		D974FE011DCE41F100428612 /* hello_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D974FDFC1DCE41F100428612 /* hello_menu.png */; };
@@ -63,6 +57,7 @@
 		D98C12411DECF1E600CD89C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12401DECF1E600CD89C0 /* MainViewController.swift */; };
 		D98C12431DECF28700CD89C0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12421DECF28700CD89C0 /* MenuViewController.swift */; };
 		D98C12451DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98C12441DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift */; };
+		D991F42B1EA4168900C0F853 /* ItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D991F42A1EA4168900C0F853 /* ItemState.swift */; };
 		D9A1AA811DF2452B0074974C /* PinSelectionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A1AA801DF2452B0074974C /* PinSelectionMenuItem.swift */; };
 		D9A1AA831DF245460074974C /* PinSelectionMenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A1AA821DF245460074974C /* PinSelectionMenuItem.xib */; };
 		D9A1AA871DF24AB20074974C /* RKCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A1AA861DF24AB20074974C /* RKCustomButton.m */; };
@@ -131,12 +126,6 @@
 		D961590D1DF4CCB800739982 /* newTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTableCell.swift; sourceTree = "<group>"; };
 		D963FA8E1DD7AEBB001E29BB /* FloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextField.swift; sourceTree = "<group>"; };
 		D963FA8F1DD7AEBB001E29BB /* FloatLabelTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatLabelTextView.swift; sourceTree = "<group>"; };
-		D963FA931DD7B6B2001E29BB /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
-		D963FA941DD7B6B2001E29BB /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
-		D963FA951DD7B6B2001E29BB /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
-		D963FA961DD7B6B2001E29BB /* SubTaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTaskModel.swift; sourceTree = "<group>"; };
-		D963FA971DD7B6B2001E29BB /* SubTaskTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTaskTableCell.swift; sourceTree = "<group>"; };
-		D963FA981DD7B6B2001E29BB /* SubTaskTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTaskTableCell.xib; sourceTree = "<group>"; };
 		D974FDFA1DCE41F100428612 /* about_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_menu.png; path = icons/menu/about_menu.png; sourceTree = "<group>"; };
 		D974FDFB1DCE41F100428612 /* hamburger_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hamburger_menu.png; path = icons/menu/hamburger_menu.png; sourceTree = "<group>"; };
 		D974FDFC1DCE41F100428612 /* hello_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hello_menu.png; path = icons/menu/hello_menu.png; sourceTree = "<group>"; };
@@ -151,6 +140,7 @@
 		D98C12401DECF1E600CD89C0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D98C12421DECF28700CD89C0 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		D98C12441DECF70D00CD89C0 /* MenuItemCellViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCellViewTableViewCell.swift; sourceTree = "<group>"; };
+		D991F42A1EA4168900C0F853 /* ItemState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemState.swift; sourceTree = "<group>"; };
 		D9A1AA801DF2452B0074974C /* PinSelectionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSelectionMenuItem.swift; sourceTree = "<group>"; };
 		D9A1AA821DF245460074974C /* PinSelectionMenuItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinSelectionMenuItem.xib; sourceTree = "<group>"; };
 		D9A1AA851DF24AB20074974C /* RKCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKCustomButton.h; sourceTree = "<group>"; };
@@ -280,14 +270,6 @@
 			name = Component;
 			sourceTree = "<group>";
 		};
-		D9079D931DDCC41F0019D72E /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				D963FA9F1DD7B6B6001E29BB /* Eureka */,
-			);
-			name = Unused;
-			sourceTree = "<group>";
-		};
 		D9079D951DDCC4580019D72E /* Location button Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,19 +379,6 @@
 			name = FloatLabelText;
 			sourceTree = "<group>";
 		};
-		D963FA9F1DD7B6B6001E29BB /* Eureka */ = {
-			isa = PBXGroup;
-			children = (
-				D963FA931DD7B6B2001E29BB /* LocationCell.swift */,
-				D963FA941DD7B6B2001E29BB /* LocationCell.xib */,
-				D963FA951DD7B6B2001E29BB /* LocationModel.swift */,
-				D963FA961DD7B6B2001E29BB /* SubTaskModel.swift */,
-				D963FA971DD7B6B2001E29BB /* SubTaskTableCell.swift */,
-				D963FA981DD7B6B2001E29BB /* SubTaskTableCell.xib */,
-			);
-			name = Eureka;
-			sourceTree = "<group>";
-		};
 		D974FE0E1DCE420B00428612 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,11 +482,11 @@
 		D9CEBC851DC54C3300003C44 /* ItemDetail */ = {
 			isa = PBXGroup;
 			children = (
-				D9079D931DDCC41F0019D72E /* Unused */,
 				D9079D921DDCC40C0019D72E /* Component */,
 				D9CEBC711DC54AF300003C44 /* ItemDetail.storyboard */,
 				D9CEBC581DC54A5800003C44 /* ItemDetailViewController.swift */,
 				D931F8D01DD423A500887369 /* CustomButtons.swift */,
+				D991F42A1EA4168900C0F853 /* ItemState.swift */,
 			);
 			name = ItemDetail;
 			sourceTree = "<group>";
@@ -604,6 +573,7 @@
 				D92DC80C1DC544B200744BCC /* Resources */,
 				593A512BA5800BDA6E68B9E9 /* [CP] Embed Pods Frameworks */,
 				CB90D1AB313F8ACDA2B776DB /* [CP] Copy Pods Resources */,
+				D991F4291EA40E0100C0F853 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -665,14 +635,12 @@
 				D9CEBC731DC54AF300003C44 /* ItemDetail.storyboard in Resources */,
 				D9F6ADE91DF8CC42002B3CD6 /* PreviewIGListImageSetCell.xib in Resources */,
 				D974FE0A1DCE41F600428612 /* hamburger_indicator.png in Resources */,
-				D963FA9E1DD7B6B2001E29BB /* SubTaskTableCell.xib in Resources */,
 				D974FE001DCE41F100428612 /* hamburger_menu.png in Resources */,
 				D9F752DD1DEBE0F1003ACBD9 /* CollectionCellView.xib in Resources */,
 				D974FE031DCE41F100428612 /* settings_menu.png in Resources */,
 				D9CEBC811DC54BFC00003C44 /* Main.storyboard in Resources */,
 				D974FE0C1DCE41F600428612 /* map_indicator.png in Resources */,
 				D9079D901DDBD4EF0019D72E /* AlertChoicesTableCell.xib in Resources */,
-				D963FA9A1DD7B6B2001E29BB /* LocationCell.xib in Resources */,
 				D9CEBC7A1DC54BD300003C44 /* Info.plist in Resources */,
 				D9A1AA831DF245460074974C /* PinSelectionMenuItem.xib in Resources */,
 				3B092E831DF3B6A900CF7291 /* GoogleService-Info.plist in Resources */,
@@ -739,6 +707,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToBeDone/Pods-ToBeDone-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D991F4291EA40E0100C0F853 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -771,12 +752,11 @@
 				D9CEBC621DC54A5800003C44 /* ItemDetailViewController.swift in Sources */,
 				D98C12411DECF1E600CD89C0 /* MainViewController.swift in Sources */,
 				3B092DC31DF3829500CF7291 /* SignInViewController.swift in Sources */,
-				D963FA9B1DD7B6B2001E29BB /* LocationModel.swift in Sources */,
+				D991F42B1EA4168900C0F853 /* ItemState.swift in Sources */,
 				D9079DA51DDCF2330019D72E /* String+Timepiece.swift in Sources */,
 				D9CEBC781DC54BD300003C44 /* AppDelegate .swift in Sources */,
 				3BD834131DF670B90014A7DB /* StaticSettingController.swift in Sources */,
 				D9079D881DDBB22C0019D72E /* AlertChoicesTable.swift in Sources */,
-				D963FA9D1DD7B6B2001E29BB /* SubTaskTableCell.swift in Sources */,
 				D9D2D8B71DF6FBCA00049B7E /* WriteReviewViewController.swift in Sources */,
 				D9CEBC631DC54A5800003C44 /* TodoItem.swift in Sources */,
 				D98C12431DECF28700CD89C0 /* MenuViewController.swift in Sources */,
@@ -784,7 +764,6 @@
 				D931F8D51DD4FC8600887369 /* DatePicker.swift in Sources */,
 				D9253EA31DF67D66009A4286 /* CollectonCellView.swift in Sources */,
 				D9D2D8B91DF6FDC200049B7E /* AboutViewController.swift in Sources */,
-				D963FA991DD7B6B2001E29BB /* LocationCell.swift in Sources */,
 				D9CEBC641DC54A5800003C44 /* TodoItemStore.swift in Sources */,
 				D963FA901DD7AEBB001E29BB /* FloatLabelTextField.swift in Sources */,
 				D9079D8E1DDBB9C30019D72E /* AlertChoicesTableCell.swift in Sources */,
@@ -797,7 +776,6 @@
 				D9253EA71DF68AB2009A4286 /* TrashCell.swift in Sources */,
 				D961590E1DF4CCB800739982 /* newTableCell.swift in Sources */,
 				D931F8DA1DD697F300887369 /* MapViewController.swift in Sources */,
-				D963FA9C1DD7B6B2001E29BB /* SubTaskModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
