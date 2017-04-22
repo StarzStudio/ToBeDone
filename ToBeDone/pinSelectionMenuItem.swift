@@ -19,12 +19,12 @@ class PinSelectionMenuItem: UIView {
         // Drawing code
     }
     */
-            let pinSwitchOn = NSNotification.Name(rawValue:"pinSwitchOn")
-            let pinSwitchOff = NSNotification.Name(rawValue:"pinSwitchOff")
+    let pinSwitchOn = NSNotification.Name(rawValue:"pinSwitchOn")
+    let pinSwitchOff = NSNotification.Name(rawValue:"pinSwitchOff")
     
-     @IBOutlet weak var image:UIImageView!
-      @IBOutlet weak var label:UILabel!
-      @IBOutlet weak var switchControl : FUISwitch!
+    @IBOutlet weak var image:UIImageView!
+    @IBOutlet weak var label:UILabel!
+    @IBOutlet weak var switchControl : FUISwitch!
     override func awakeFromNib() {
             setSwitchControl()
     }
@@ -34,7 +34,7 @@ class PinSelectionMenuItem: UIView {
    
     //通知处理函数
     func didMsgRecv(notification:NSNotification){
-        print("didMsgRecv: \(notification.userInfo)")
+        print("didMsgRecv: \(String(describing: notification.userInfo))")
     }
     
     

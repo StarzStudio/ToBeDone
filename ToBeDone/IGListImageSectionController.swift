@@ -24,8 +24,8 @@ class IGListImageSectionController: IGListSectionController, IGListSectionType {
     
     
     func cellForItem(at index: Int) -> UICollectionViewCell {
-        let cell = collectionContext!.dequeueReusableCellFromStoryboard(withIdentifier: "IGListImageSetCell", for: self, at: index) as! IGListImageSetCell
-
+        //let cell = collectionContext!.dequeueReusableCellFromStoryboard(withIdentifier: "IGListImageSetCell", for: self, at: index) as! IGListImageSetCell
+         let cell = collectionContext!.dequeueReusableCell(of: IGListImageSetCell.self , for: self, at: index) as! IGListImageSetCell
         if let object = object {
             cell.image.image = object.image
             cell.contentMode = .scaleAspectFit

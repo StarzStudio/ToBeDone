@@ -21,113 +21,113 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        NotificationUtility.enableLocalNotifications(application: application)//enable notification
+        NotificationService.enableLocalNotifications(application: application)//enable notification
         
-        FIRApp.configure()//configure Firebase
+       // FIRApp.configure()//configure Firebase
         
         // fill realm db for test purpose
 
         fillDBWithTestData()
 
         
-        FirebaseUtility.syncData()
+     //   FirebaseService.syncData()
     
         return true
     }
     
     func fillDBWithTestData() {
         // inbox
-        let item1 = TodoItem()
+        let item1 = TodoItemDTO()
         item1.title = "Buy milk"
            item1.state = "Inbox"
         item1.note = "Buy some organic milk"
-        item1.modifiedDate = item1.createdDate
+        
         // scheduled
-        let item2 = TodoItem()
+        let item2 = TodoItemDTO()
         item2.title = "Go lunch with john"
         item2.state = "Scheduled"
         item2.note = "Remeber John doesn't like spicy food!"
-        item2.scheduledDate = DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 1)
-        item2.modifiedDate = item2.createdDate
-        let item6 = TodoItem()
+        item2.scheduledDate = DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 1)
+        
+        let item6 = TodoItemDTO()
         item6.title = "meet with Kevin"
         item6.state = "Scheduled"
         item6.note = "Kevin will bring me to eat Sushi tonight"
-        item6.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 2)
-        item6.modifiedDate = item6.createdDate
-        let item7 = TodoItem()
+        item6.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 2)
+        
+        let item7 = TodoItemDTO()
         item7.title = "watch <Western World>"
         item7.state = "Scheduled"
         item7.note = "This is the annual greaest TV series on HBO"
-        item7.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 4)
-        item7.modifiedDate = item7.createdDate
-        let item8 = TodoItem()
+        item7.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 4)
+        
+        let item8 = TodoItemDTO()
         item8.title = "do the laundry"
         item8.state = "Scheduled"
         item8.note = "I need to clean my underwear and a pair of jeans, and my shoes"
-        item8.modifiedDate = item8.createdDate
-        item8.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 7)
-        let item9 = TodoItem()
+        
+        item8.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 7)
+        let item9 = TodoItemDTO()
         item9.title = "return the keys"
         item9.checked = true
         item9.note = "The key is borrowed from Mike, lives in HV 105"
         item9.state = "Scheduled"
-        item9.modifiedDate = item9.createdDate
-        item9.scheduledDate = DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 11)
-        let item10 = TodoItem()
+        
+        item9.scheduledDate = DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 11)
+        let item10 = TodoItemDTO()
         item10.title = "Watch Udacity Course"
         item10.checked = true
         item10.note = "The hardware course: High performance architecture is perfect"
         item10.state = "Scheduled"
-        item10.modifiedDate = item10.createdDate
-        item10.scheduledDate = DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 1)
+        
+        item10.scheduledDate = DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 1)
         // today
-        let item3 = TodoItem()
+        let item3 = TodoItemDTO()
         item3.title = "Go jogging"
         item3.state = "Today"
         item3.note  = "Meet with Fan and go together to the central park for jogging"
-        item3.modifiedDate = item3.createdDate
-        item3.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 0)
-        let item34 = TodoItem()
+        
+        item3.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
+        let item34 = TodoItemDTO()
         item34.title = "Ask MSI service"
         item34.state = "Today"
         item34.note  = "There is something wrong with sound card in MSI laptop, need to check with the custom service today"
-        item34.modifiedDate = item3.createdDate
-        item34.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 0)
-        let item35 = TodoItem()
+        
+        item34.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
+        let item35 = TodoItemDTO()
         item35.title = "Ask Fedilis"
         item35.state = "Today"
         item35.note  = "Get to know which area does the Fedilis insurance company covered"
-        item35.modifiedDate = item3.createdDate
-        item35.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 0)
         
-        let item36 = TodoItem()
+        item35.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
+        
+        let item36 = TodoItemDTO()
         item36.title = "See a moive"
         item36.state = "Today"
         item36.note  = "The moive starts at 2: 00 pm"
-        item36.modifiedDate = item3.createdDate
-        item36.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday: 0)
+        
+        item36.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
         // logbook
-        let item4 = TodoItem()
+        let item4 = TodoItemDTO()
         item4.title = "buy eggs"
         item4.checked = true
         item4.note  = "I need organic eggs"
-        item4.modifiedDate = item4.createdDate
-        item4.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday:0)
+        
+        item4.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday:0)
         item4.state = "LogBook"
-        let item11 = TodoItem()
+        let item11 = TodoItemDTO()
         item11.title = "fix the disk"
         item11.note = "the HDD is broken, I should buy a new SSD"
         item11.checked = true
-        item11.modifiedDate = item11.createdDate
-        item11.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday:-28)
+        
+        item11.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday:-28)
         item11.state = "LogBook"
         // trash
-        let item5 = TodoItem()
+        let item5 = TodoItemDTO()
         item5.title = "send email to Jim ask for Saturday's plan"
-        item5.modifiedDate = item5.createdDate
+        
         item5.note = "Jim mentioned that we may go to the green lake this Saturday"
-        item5.scheduledDate =  DateUtility.stringFromScheduledDate(numOfDatesSinceToday:-11)
+        item5.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday:-11)
         item5.state = "Trash"
         
         
@@ -136,38 +136,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         
         store.add(item: item1)
-        //FirebaseUtility.addItemToFirebase(with: item1)
+        //FirebaseService.addItemToFirebase(with: item1)
         store.add(item: item2)
-       // FirebaseUtility.addItemToFirebase(with: item2)
+       // FirebaseService.addItemToFirebase(with: item2)
         store.add(item: item3)
-        //FirebaseUtility.addItemToFirebase(with: item3)
+        //FirebaseService.addItemToFirebase(with: item3)
         store.add(item: item4)
-       // FirebaseUtility.addItemToFirebase(with: item4)
+       // FirebaseService.addItemToFirebase(with: item4)
         store.add(item: item5)
-       // FirebaseUtility.addItemToFirebase(with: item5)
+       // FirebaseService.addItemToFirebase(with: item5)
         store.add(item: item6)
-       // FirebaseUtility.addItemToFirebase(with: item6)
+       // FirebaseService.addItemToFirebase(with: item6)
         store.add(item: item7)
-      //  FirebaseUtility.addItemToFirebase(with: item7)
+      //  FirebaseService.addItemToFirebase(with: item7)
         store.add(item: item8)
-      //  FirebaseUtility.addItemToFirebase(with: item8)
+      //  FirebaseService.addItemToFirebase(with: item8)
         store.add(item: item9)
-       // FirebaseUtility.addItemToFirebase(with: item9)
+       // FirebaseService.addItemToFirebase(with: item9)
         store.add(item: item10)
-       // FirebaseUtility.addItemToFirebase(with: item10)
+       // FirebaseService.addItemToFirebase(with: item10)
         store.add(item: item11)
           store.add(item: item34)
         store.add(item: item35)
         store.add(item: item36)
-       // FirebaseUtility.addItemToFirebase(with: item11)
+       // FirebaseService.addItemToFirebase(with: item11)
         print("adding success");
         
         let allTodoItems = store.getAllTodoItems()
         for (index, value) in allTodoItems.enumerated() {
-            print(" item \(index) is  \(value.title!)")
+            print(" item \(index) is  \(value.title)")
         }
         
-        //FirebaseUtility.addDatabaseToFirebase(database: <#T##Dictionary<String, Any>#>)
+        //FirebaseService.addDatabaseToFirebase(database: <#T##Dictionary<String, Any>#>)
         
         // print out db path
         

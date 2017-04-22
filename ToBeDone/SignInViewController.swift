@@ -70,7 +70,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate{
                 return
             }
             self.signedIn(user!)
-            FirebaseUtility.syncData()
+          //  FirebaseService.syncData()
             
             
         }

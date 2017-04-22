@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="K3W-97-a5n">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="K3W-97-a5n">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -221,16 +221,16 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="IGListImageSet" destination="5MJ-fK-Mmo" id="wmE-P5-ljq"/>
-                        <outlet property="alertTimeImage" destination="yFX-R0-B9A" id="Wxm-s1-aSS"/>
-                        <outlet property="alertTimeLabel" destination="uc4-XR-Dfx" id="Z6H-Ed-r7s"/>
-                        <outlet property="confirmBotton" destination="Jcv-bx-puk" id="hnv-cQ-5y9"/>
-                        <outlet property="dueDateImage" destination="w0o-y8-t3H" id="eRQ-Ur-89p"/>
-                        <outlet property="dueDateLabel" destination="H6l-3x-vUf" id="iiZ-rL-HRy"/>
-                        <outlet property="itemNote" destination="19g-HK-Dr8" id="dvX-IM-w4L"/>
-                        <outlet property="itemTitle" destination="q2D-6u-IFO" id="yxF-zA-3N7"/>
-                        <outlet property="locationButton" destination="zwh-45-wSN" id="oxG-dR-0f2"/>
-                        <outlet property="tagList" destination="vei-QM-Eal" id="ati-ty-srr"/>
+                        <outlet property="IGListImageSet_CollectionView" destination="5MJ-fK-Mmo" id="cQx-by-jjh"/>
+                        <outlet property="alertTime_ImageView" destination="yFX-R0-B9A" id="V7e-ry-nNh"/>
+                        <outlet property="alertTime_Label" destination="uc4-XR-Dfx" id="Cp3-KL-TFV"/>
+                        <outlet property="confirm_Button" destination="Jcv-bx-puk" id="3sk-YG-mi4"/>
+                        <outlet property="dueDate_ImageView" destination="w0o-y8-t3H" id="0wI-Mv-iMg"/>
+                        <outlet property="dueDate_Label" destination="H6l-3x-vUf" id="evr-80-Jc4"/>
+                        <outlet property="itemNote_TextView" destination="19g-HK-Dr8" id="u07-vL-Jw1"/>
+                        <outlet property="itemTitle_TextField" destination="q2D-6u-IFO" id="Z1u-z1-be9"/>
+                        <outlet property="location_Button" destination="zwh-45-wSN" id="pid-ub-SIX"/>
+                        <outlet property="tagList_TagsView" destination="vei-QM-Eal" id="avC-cU-pMf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ppR-Yw-d61" userLabel="First Responder" sceneMemberID="firstResponder"/>

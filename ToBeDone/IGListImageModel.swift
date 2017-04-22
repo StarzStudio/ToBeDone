@@ -9,7 +9,7 @@
 import  UIKit
 import IGListKit
 
-class IGListImageModel :UIImage, IGListDiffable{
+class IGListImageModel :UIImage {
  
     let id = UUID()
     var image : UIImage?
@@ -26,7 +26,7 @@ class IGListImageModel :UIImage, IGListDiffable{
         fatalError("init(coder:) has not been implemented")
     }
     
-    func diffIdentifier() -> NSObjectProtocol {
+    override func diffIdentifier() -> NSObjectProtocol {
         return id as NSObjectProtocol
     }
     

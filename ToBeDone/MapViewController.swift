@@ -15,7 +15,7 @@ public class MapViewController : UIViewController, MKMapViewDelegate {
     
 //    public var onDismissCallback: ((UIViewController) -> ())?
     var location: CLLocation?
-    var locationManager = LocationManager.sharedInstance
+    var locationManager = LocationService.sharedInstance
     
     lazy var mapView : MKMapView = { [unowned self] in
         let v = MKMapView(frame: self.view.bounds)

@@ -34,7 +34,15 @@ class StaticSettingController: UITableViewController {
         let item1 = TodoItem()
         item1.title = "item1_InBox"
         item1.modifiedDate = item1.createdDate
-        FirebaseUtility.addItemToFirebase(with: item1)
+        
+        
+        
+        //FirebaseService.addItemToFirebase(with: item1)
+        
+        
+        
+        
+        
         
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 80))//create a tableFooterView
         
@@ -186,8 +194,15 @@ class StaticSettingController: UITableViewController {
         if FIRAuth.auth()?.currentUser != nil{
             let prompt = UIAlertController.init(title: "Clean Data?", message: "This will remove your data from both local and remote.", preferredStyle: .alert)
             let yesAction = UIAlertAction.init(title: "Yes", style: .default, handler: {(action) in
-                    FirebaseUtility.removeDatabaseFromFirebase()
-                })
+                
+                
+                
+                
+                // FirebaseService.removeDatabaseFromFirebase()
+                
+            
+            
+            })
             let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
             prompt.addAction(yesAction)
             prompt.addAction(cancelAction)

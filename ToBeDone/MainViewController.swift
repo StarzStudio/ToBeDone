@@ -19,12 +19,6 @@ class MainViewController: UIViewController  {
     
     // MARK: - Property
     let todoItemStore  = TodoItemStore.sharedInstance
-    struct TableViewContent {
-        var items: Results<TodoItem>?
-        var collectionType: String?
-        var title : String?
-    }
-    
     
     @IBOutlet weak var subViewContainerView: UIView!
     
@@ -36,15 +30,15 @@ class MainViewController: UIViewController  {
 
     
     
-    let mainColor      = UIColor(hex: 0x804C5F)
-    let derivatedColor = UIColor(hex: 0x794759)
+    
+    
     var selectedIndex = 2
     var selectedTable:UITableViewController?
     var menu: UIViewController?
     var counter = 0
     
-    var ref: FIRDatabaseReference!
-    fileprivate var _refHandle: FIRDatabaseHandle!
+   // var ref: FIRDatabaseReference!
+    // fileprivate var _refHandle: FIRDatabaseHandle!
     
     
     // MARK: - LifeCycle
@@ -55,73 +49,74 @@ class MainViewController: UIViewController  {
         flowingMenuTransitionManager.setInteractivePresentationView(view)
         flowingMenuTransitionManager.delegate = self
         
-        view.backgroundColor          = mainColor
+    
         
-
         //add whole local database to firebase
-        //FirebaseUtility.syncData()
+        //FirebaseService.syncData()
         
         
-        configureDatabase()
+       // configureDatabase()
         
         
     }
     
-    deinit {
-        if let user = FIRAuth.auth()?.currentUser{
-            self.ref.child("/Users/\(user.uid)/database").removeObserver(withHandle: _refHandle)
-        }
-    }
+//    deinit {
+//        if let user = FIRAuth.auth()?.currentUser{
+//            self.ref.child("/Users/\(user.uid)/database").removeObserver(withHandle: _refHandle)
+//        }
+//    }
 
     
-    func configureDatabase() {
-        ref = FIRDatabase.database().reference()
-        if let user = FIRAuth.auth()?.currentUser{
-            // Listen for new messages in the Firebase database
-            _refHandle = self.ref.child("/Users/\(user.uid)/database").observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-                guard let strongSelf = self else { return }
-                
-                
-                    let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
-                    let item = FirebaseUtility.parseData(from: itemDictionary)
-                    strongSelf.todoItemStore.update(item: item)
-                    print("New item: \(item.title)")
-                    if  strongSelf.selectedTable is ToDoItemsViewController2 {
-                        
-                        let table = strongSelf.selectedTable as! ToDoItemsViewController2
-                        print("\(item.state)")
-                        print("\(table.collectionType!)")
-                        if item.state == table.collectionType!{
-                            print("wutttt")
-                            //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
-                            
-                            table.prepareData()
-                            table.tableView.reloadData()
-                    }
-                }
-            })
-            self.ref.child("/Users/\(user.uid)/database").observe(.childRemoved, with: { [weak self] (snapshot) -> Void in
-                guard let strongSelf = self else { return }
-                let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
-                let item = FirebaseUtility.parseData(from: itemDictionary)
-                strongSelf.todoItemStore.deleteItem(withID: item.id)
-                print("item removed: \(item.title!)")
-                if  strongSelf.selectedTable is ToDoItemsViewController2 {
-                    print("sdasd)")
-                    let table = strongSelf.selectedTable as! ToDoItemsViewController2
-                    print("\(item.state)")
-                    print("\(table.collectionType!)")
-                    if item.state == table.collectionType!{
-                        //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
-                        print("sdasdasdasd)")
-                        table.prepareData()
-                        table.tableView.reloadData()
-                    }
-                }
-            })
-        }
-        //self.showDemoControllerForIndex(selectedIndex)
-    }
+//    func configureDatabase() {
+//        ref = FIRDatabase.database().reference()
+//        if let user = FIRAuth.auth()?.currentUser{
+//            // Listen for new messages in the Firebase database
+//            _refHandle = self.ref.child("/Users/\(user.uid)/database").observe(.childAdded, with: { [weak self] (snapshot) -> Void in
+//                guard let strongSelf = self else { return }
+//                
+//                
+//                    let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
+//                    let item = FirebaseService.parseData(from: itemDictionary)
+//                    strongSelf.todoItemStore.update(item: item)
+//                    print("New item: \(item.title)")
+//                    if  strongSelf.selectedTable is ToDoItemsViewController2 {
+//                        
+//                        let table = strongSelf.selectedTable as! ToDoItemsViewController2
+//                        print("\(item.state)")
+//                        print("\(table.collectionType!)")
+//                        if item.state == table.collectionType!{
+//                            print("wutttt")
+//                            //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
+//                            
+//                            table.prepareData()
+//                            table.tableView.reloadData()
+//                    }
+//                }
+//            })
+//            self.ref.child("/Users/\(user.uid)/database").observe(.childRemoved, with: { [weak self] (snapshot) -> Void in
+//                guard let strongSelf = self else { return }
+//                let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
+//                let item = FirebaseService.parseData(from: itemDictionary)
+//                strongSelf.todoItemStore.deleteItem(withID: item.id)
+//                print("item removed: \(item.title!)")
+//                if  strongSelf.selectedTable is ToDoItemsViewController2 {
+//                    print("sdasd)")
+//                    let table = strongSelf.selectedTable as! ToDoItemsViewController2
+//                    print("\(item.state)")
+//                    print("\(table.collectionType!)")
+//                    if item.state == table.collectionType!{
+//                        //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
+//                        print("sdasdasdasd)")
+//                        table.prepareData()
+//                        table.tableView.reloadData()
+//                    }
+//                }
+//            })
+//        }
+//        //self.showDemoControllerForIndex(selectedIndex)
+//    }
+//    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -216,8 +211,8 @@ class MainViewController: UIViewController  {
         case .LogBookTableVC:
             fallthrough
         case .TrashTableVC:
-            let toDoItemTableListStoryboard = UIStoryboard.init(name: "TodoItemTableList", bundle: nil)
-            if let toDoItemTableListVC = toDoItemTableListStoryboard.instantiateInitialViewController() as?ToDoItemsViewController2 {
+            let toDoItemTableListStoryboard = UIStoryboard.init(name: "ItemList", bundle: nil)
+            if let toDoItemTableListVC = toDoItemTableListStoryboard.instantiateInitialViewController() as?ToDoItemsViewController {
                 toDoItemTableListVC.items = items
                 toDoItemTableListVC.collectionType = collectionType
                 let tableTitle = tableViewContent.collectionType
@@ -288,11 +283,14 @@ class MainViewController: UIViewController  {
     func rightNaviBarItemActionForItemTable1() {
         updateTableViewAction()
     }
+    
     let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
+    
     func updateTableViewAction() {
         let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
         NotificationCenter.default.post(updateContent as Notification)
     }
+    
     func rightNaviBarItemActionForItemTable2() {
         
         let itemDetailStoryboard = UIStoryboard.init(name: "ItemDetail", bundle: nil)
@@ -326,22 +324,5 @@ class MainViewController: UIViewController  {
     }
 }
 
-extension MainViewController : FlowingMenuDelegate {
-    // MARK: - FlowingMenu Delegate Methods
-    
-    func colorOfElasticShapeInFlowingMenu(_ flowingMenu: FlowingMenuTransitionManager) -> UIColor? {
-        return mainColor
-    }
-    
-    func flowingMenuNeedsPresentMenu(_ flowingMenu: FlowingMenuTransitionManager) {
-        performSegue(withIdentifier: PresentSegueName, sender: self)
-    }
-    
-    func flowingMenuNeedsDismissMenu(_ flowingMenu: FlowingMenuTransitionManager) {
-        menu?.performSegue(withIdentifier: DismissSegueName, sender: self)
-        showDemoControllerForIndex(self.selectedIndex)
-           print ("flowingMenuNeedsDismissMenu: selected Index: \(selectedIndex)")
-    }
 
-}
 

@@ -26,7 +26,7 @@ final class MenuItemCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // iOS 10 bug: rdar://27644391
+      
         contentView.layoutSubviews()
         
         menuItemImageView.layer.cornerRadius = menuItemImageView.bounds.width / 2

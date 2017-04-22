@@ -35,7 +35,8 @@ class previewIGListImageSectionController : IGListSectionController, IGListSecti
         
         
       //  [self.phtotLocationTableview registerNib:[UINib nibWithNibName:@"placePhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"placePhotoTableViewCell"];
-        let cell = collectionContext!.dequeueReusableCell(withNibName: "PreviewIGListImageSetCell", bundle: nil, for: self, at:index)  as! PreviewIGListImageSetCell
+        let cell = collectionContext!.dequeueReusableCell(of: PreviewIGListImageSetCell.self, for: self, at: index) as! PreviewIGListImageSetCell
+       // let cell = collectionContext!.dequeueReusableCell(withNibName: "PreviewIGListImageSetCell", bundle: nil, for: self, at:index)  as! PreviewIGListImageSetCell
         
         if let object = object {
             cell.image.image = object.image

@@ -217,8 +217,9 @@ extension ToDoItemsViewController {
             //print("before pushViewController")
             self.navigationController?.pushViewController(itemDetailVC, animated: true)
             //print("after pushViewController")
-            itemDetailVC.isNewAddingItem = false
-            itemDetailVC.item = item
+            
+            itemDetailVC.viewModel.modifyItem(itemToBeModified: item)
+            
             setNavigationControllerForItemDetail(detailView: itemDetailVC)
         }
     }
