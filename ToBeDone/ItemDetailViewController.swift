@@ -19,11 +19,11 @@ import RKTagsView
 import FlatUIKit
 
 
-class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
+class ItemDetailViewController : UIViewController{
     // MARK: @IBOutlet
     @IBOutlet weak var tagList_TagsView : RKTagsView!
     @IBOutlet weak var itemNote_TextView : FloatLabelTextView!
-    @IBOutlet weak var IGListImageSet_CollectionView: IGListCollectionView!
+    @IBOutlet weak var images_CollectionView: UICollectionView!
     @IBOutlet weak var location_Button : imgLeftTitleRightButton!
     @IBOutlet weak var subTasks_Table: UITableView!
     @IBOutlet weak var confirm_Button : UIButton!
@@ -36,12 +36,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
     
     // MARK: - property
     
-    var IGListData : [IGListImageModel]! = [IGListImageModel(image:UIImage())]
-    lazy var adapter: IGListAdapter = {
-        return IGListAdapter(updater: IGListAdapterUpdater(), viewController: self, workingRangeSize: 0)
-    }()
     
-    var imageURLs:[String]?
     
     // MARK: - tool menu
     
@@ -68,7 +63,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
     var dateTimeImage : UIImageView!
     var alertImage : UIImageView!
     var addPhotoImage : UIImageView!
-    let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
+    
     var rowItems = Array<Any>()
     
     
@@ -95,15 +90,15 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
             self.alertTime_ImageView.isHidden = false
         }
         
-        if let tags = viewModel.item.tags {
-            for tag in tags {
+        
+            for tag in viewModel.item.tags {
                 self.tagList_TagsView.addTag(tag)
             }
-        }
         
         
-        if let images = viewModel.item.images {
-            for image in images {
+        
+        
+            for image in viewModel.item.images.values {
                 
 //                let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
 //                let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
@@ -116,7 +111,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
                     adapter.performUpdates(animated: true, completion: nil)
                 
             }
-        }
+        
     }
     
 
@@ -131,8 +126,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
         setItemNote()
         setLocationButton()
         setDropDownMenu()
-        setIGListCollectionView()
-        setIGListDataForTest()
+      
         setHidedItems()
         setConfirmBotton()
         
@@ -166,14 +160,12 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
         notify()
         
         self.navigationController?.popViewController(animated: true)
-        updateTableViewAction()
+        
+        self.viewModel.updateTableViewAction()
     }
     
 
-    func updateTableViewAction() {
-        let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
-        NotificationCenter.default.post(updateContent as Notification)
-    }
+    
     
 
     fileprivate func notificationCenterSetup() {
@@ -200,16 +192,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
     }
     
     
-    
-    fileprivate func setIGListDataForTest () {
-        let image1 = UIImage(named: "shoppingList1_Test")!
-        let image2 = UIImage(named: "shoppingList2_Test")!
-        let image3 = UIImage(named: "memo_Test")!
-        IGListData.append(IGListImageModel(image: image1))
-        IGListData.append(IGListImageModel(image: image2))
-        IGListData.append(IGListImageModel(image: image3))
-        adapter.performUpdates(animated: true, completion: nil)
-    }
+   
     
     override func viewDidAppear(_ animated: Bool) {
        //   setConstraint()
@@ -326,41 +309,7 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
         
     }
 
-    // MARK: IGList image set
-    
-   
-   
-    fileprivate func setIGListCollectionView () {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
-    //    layout.sectionInset = UIEdgeInsetsMake(3, 5, 3, 5)
-        self.IGListImageSet_CollectionView.alwaysBounceVertical = false
-        self.IGListImageSet_CollectionView.alwaysBounceHorizontal = true
-        self.IGListImageSet_CollectionView.collectionViewLayout = layout
-        self.IGListImageSet_CollectionView.allowsSelection = true
-        adapter.collectionView = self.IGListImageSet_CollectionView
-        adapter.dataSource = self
-        
-    }
-    
 
-    
-    func objects(for listAdapter: IGListAdapter) -> [IGListDiffable] {
-        // this can be anything!
-        return IGListData!
-    
-    }
-    
-    func listAdapter(_ listAdapter: IGListAdapter, sectionControllerFor object: Any) -> IGListSectionController {
-
-        return IGListImageSectionController()
-    }
-    
-    func emptyView(for listAdapter: IGListAdapter) -> UIView? {
-        return nil
-    }
-    
     // MARK: hided items
     fileprivate func setHidedItems (){
         self.dueDate_Label.isHidden = true
@@ -369,7 +318,17 @@ class ItemDetailViewController : UIViewController, IGListAdapterDataSource{
         self.alertTime_ImageView.isHidden = true
     }
    
-       // MARK: confirm Button
+       
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if self.itemTitle_TextField.isFirstResponder  == true {
+            self.itemTitle_TextField.resignFirstResponder()
+        }
+        if self.itemNote_TextView.isFirstResponder == true {
+            self.itemNote_TextView.resignFirstResponder()
+        }
+    }
+
     
 }
 

@@ -13,7 +13,13 @@ class ArchivedItemTableCell: UITableViewCell {
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
-    
+
+    var cellModel : ItemCellModel? {
+        didSet {
+            dateLabel.text = cellModel!.createdDate
+            titleLabel.text = cellModel!.title
+        }
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -35,6 +41,7 @@ class ArchivedItemTableCell: UITableViewCell {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
         // automatica number of lines
         titleLabel.numberOfLines = 0
+
     }
     
     private func initDateLabel() {
@@ -44,6 +51,7 @@ class ArchivedItemTableCell: UITableViewCell {
         dateLabel.font = UIFont.boldSystemFont(ofSize: 15)
         // automatica number of lines
         dateLabel.numberOfLines = 0
+
     }
     
     

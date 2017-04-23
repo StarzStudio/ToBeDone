@@ -13,7 +13,7 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-    var window: UIWindow?
+     var window: UIWindow?
      let dbManager = RealmDBManager.sharedInstance
      let store = TodoItemStore.sharedInstance;
     
@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        NotificationService.enableLocalNotifications(application: application)//enable notification
+       //  NotificationService.enableLocalNotifications(application: application)//enable notification
         
        // FIRApp.configure()//configure Firebase
         
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // inbox
         let item1 = TodoItemDTO()
         item1.title = "Buy milk"
-           item1.state = "Inbox"
+        item1.state = "Inbox"
         item1.note = "Buy some organic milk"
         
         // scheduled
@@ -105,23 +105,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item36.title = "See a moive"
         item36.state = "Today"
         item36.note  = "The moive starts at 2: 00 pm"
-        
         item36.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
         // logbook
         let item4 = TodoItemDTO()
         item4.title = "buy eggs"
         item4.checked = true
         item4.note  = "I need organic eggs"
-        
         item4.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday:0)
-        item4.state = "LogBook"
+        item4.state = "Archived"
+        
         let item11 = TodoItemDTO()
         item11.title = "fix the disk"
         item11.note = "the HDD is broken, I should buy a new SSD"
         item11.checked = true
         
         item11.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday:-28)
-        item11.state = "LogBook"
+        item11.state = "Archived"
         // trash
         let item5 = TodoItemDTO()
         item5.title = "send email to Jim ask for Saturday's plan"

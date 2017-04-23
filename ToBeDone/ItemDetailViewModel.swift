@@ -135,7 +135,11 @@ class ItemDetailViewModel : Observer {
         }
 
     }
-
+    let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
     
+    func updateTableViewAction() {
+        let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
+        NotificationCenter.default.post(updateContent as Notification)
+    }
   
 }

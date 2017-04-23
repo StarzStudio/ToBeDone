@@ -20,7 +20,7 @@ import RealmSwift
 
 
 class ImageFile : Object {
-    dynamic  var fileURL : URL?
+    dynamic  var fileURL : String?
     dynamic var itemId : String?
     dynamic var imageId = UUID().uuidString
     dynamic  var firebaseFileURL : String?
@@ -46,7 +46,7 @@ class TodoItem : Object {
     
     //  var imageFiles = List<ImageFile>()
     
-    dynamic var id  = UUID().uuidString
+    dynamic var id  = ""
     dynamic var createdDate :String = {
         return DateUtilities.stringFromCurrentDate()
     }()

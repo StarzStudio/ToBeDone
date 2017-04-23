@@ -14,35 +14,44 @@ enum ActionOnCellType {
     case Select
     case DisSelect
 }
+
 class ItemTableViewModel {
     
     static var sharedInstance = ItemTableViewModel()
     private let itemStore = TodoItemStore.sharedInstance
-    
+    var currentTableContentType = "" {
+        didSet {
+            updateData()
+        }
+    }
     var itemsCollection = [TodoItemDTO]() {
         didSet {
-            getItemCellsStateContent()
+            getItemCellsStateContentFromCollection()
         }
     }
     
-    var itemCellsStateCollection = [ItemCellState]()
+    var itemCellModelsCollection = [ItemCellModel]()
     private let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
     
-    private func getItemCellsStateContent() {
+    
+    
+    private func getItemCellsStateContentFromCollection() {
+        //clear all old data
+        itemCellModelsCollection.removeAll()
+        
         for (index, item) in itemsCollection.enumerated() {
-            let itemState = itemCellsStateCollection[index]
-            itemState.title = item.title
-            itemState.note = item.note
-            itemState.state = item.state
-            itemState.images = item.images!
+            let itemModel = ItemCellModel()
+            itemModel.cellIndex = index
+            itemModel.title = item.title
+            itemModel.note = item.note
+            itemModel.state = item.state
+            itemModel.images = Array( item.images.values)
+            itemCellModelsCollection.append(itemModel)
         }
     }
     
-    private func getItemDataFromDB(itemType: String) {
-    switch itemType {
-        case "Scheduled"
-    }
-    }
+    
+    
     // triggered when user click the action button in table view
     func actionOnSelectedCells (actionType : ActionOnCellType) {
         switch actionType {
@@ -53,20 +62,23 @@ class ItemTableViewModel {
         default:
             break
         }
+         updateTableViewAction()
     }
     
     func actionOnSingleCell (itemCellIndex : Int, actionType : ActionOnCellType) {
+       
         let item = itemsCollection[itemCellIndex]
         switch actionType {
         case .Log:
-            updateItemState(item: item, newState: "LogBook")
+            updateItemState(item: item, newState: "Archived")
         case .Delete:
             updateItemState(item: item, newState: "Trash")
         case .Select:
-            self.itemCellsStateCollection[itemCellIndex].isChecked = true
+            self.itemCellModelsCollection[itemCellIndex].isChecked = true
         case .DisSelect:
-            self.itemCellsStateCollection[itemCellIndex].isChecked = false
+            self.itemCellModelsCollection[itemCellIndex].isChecked = false
         }
+         updateTableViewAction()
     }
     
     func updateTableViewAction() {
@@ -78,8 +90,8 @@ class ItemTableViewModel {
     
     // change all selected item cells' items' state
     private func updateItemsState (newState : String) {
-        for (itemIndex, itemCellState) in itemCellsStateCollection.enumerated() {
-            if itemCellState.isChecked == true {
+        for (itemIndex, ItemCellModel) in itemCellModelsCollection.enumerated() {
+            if ItemCellModel.isChecked == true {
                 let selectedItem = itemsCollection[itemIndex]
                 selectedItem.state =  newState
                 itemStore.update(item: selectedItem)
@@ -88,11 +100,14 @@ class ItemTableViewModel {
     }
     
     private func updateItemState (item : TodoItemDTO, newState : String) {
-        
         item.state =  newState
         itemStore.update(item: item)
-        
+       
     }
     
+    func updateData() {
+        itemsCollection = itemStore.queryItems(withState: currentTableContentType)
+    }
+
     
 }

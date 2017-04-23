@@ -12,13 +12,22 @@ import RealmSwift
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-import Toast_Swift
 
+
+enum DestinationVCType : Int {
+    
+    case InboxTableVC, TodayTableVC, ScheduledTableVC, ArchivedTableVC
+    case SettingVC
+    
+}
 
 class MainViewController: UIViewController  {
     
     // MARK: - Property
-    let todoItemStore  = TodoItemStore.sharedInstance
+    
+ 
+
+    
     
     @IBOutlet weak var subViewContainerView: UIView!
     
@@ -30,12 +39,12 @@ class MainViewController: UIViewController  {
 
     
     
-    
+    var viewModel = MainViewModel.sharedInstance
     
     var selectedIndex = 2
     var selectedTable:UITableViewController?
     var menu: UIViewController?
-    var counter = 0
+    
     
    // var ref: FIRDatabaseReference!
     // fileprivate var _refHandle: FIRDatabaseHandle!
@@ -128,7 +137,7 @@ class MainViewController: UIViewController  {
     override func viewDidDisappear(_ animated: Bool) {
         print("main view disappear")
         
-           print ("view disappear: selected Index: \(selectedIndex)")
+        print ("view disappear: selected Index: \(selectedIndex)")
     }
 
     
@@ -154,78 +163,27 @@ class MainViewController: UIViewController  {
     }
     
     
-    enum DestinationVCType : Int {
-        case IntroVC
-        case InboxTableVC, TodayTableVC, ScheduledTableVC, LogBookTableVC, TrashTableVC
-        case SettingVC
+    fileprivate func  loadTableView(type: DestinationVCType){
         
-    }
-
-    
-    fileprivate func findDestinationType (index: Int) ->DestinationVCType?{
-        return DestinationVCType(rawValue: index)
-    }
-    
-    
-    fileprivate func setDestinationVCContent(type: DestinationVCType) -> TableViewContent{
         
-        var tableViewContent = TableViewContent()
-        
+        var tableViewState = ""
         switch type {
         case .InboxTableVC:
-            tableViewContent.items = todoItemStore.query(stateName: "'Inbox'", property:"scheduledDate")
-            tableViewContent.collectionType = "Inbox"
+            tableViewState = "Inbox"
+            initTableView(withState: tableViewState)
         case .ScheduledTableVC:
-            tableViewContent.items = todoItemStore.query(stateName: "'Scheduled'", property: "scheduledDate")
-            tableViewContent.collectionType = "Scheduled"
+            tableViewState = "Scheduled"
+            initTableView(withState: tableViewState)
         case .TodayTableVC:
-            tableViewContent.items = todoItemStore.query(stateName: "'Today'", property: "scheduledDate")
-            tableViewContent.collectionType = "Today"
-        case .LogBookTableVC:
-            tableViewContent.items = todoItemStore.query(stateName: "'LogBook'", property: "scheduledDate")
-            tableViewContent.collectionType = "LogBook"
-        case .TrashTableVC:
-            tableViewContent.items = todoItemStore.query(stateName: "'Trash'", property: "scheduledDate")
-            tableViewContent.collectionType = "Trash"
-        default:
-            break
-        }
-        return tableViewContent
-    }
-    
-    fileprivate func  fillSubContainerView(type: DestinationVCType,  tableViewContent: TableViewContent){
+            tableViewState = "Today"
+            initTableView(withState: tableViewState)
+        case .ArchivedTableVC:
+            tableViewState = "Archived"
+            initTableView(withState: tableViewState)
         
-      
-        
-        let items = tableViewContent.items
-        let collectionType = tableViewContent.collectionType
-        
-        
-        switch type {
-        case .InboxTableVC:
-            fallthrough
-        case .ScheduledTableVC:
-            fallthrough
-        case .TodayTableVC:
-            fallthrough
-        case .LogBookTableVC:
-            fallthrough
-        case .TrashTableVC:
-            let toDoItemTableListStoryboard = UIStoryboard.init(name: "ItemList", bundle: nil)
-            if let toDoItemTableListVC = toDoItemTableListStoryboard.instantiateInitialViewController() as?ToDoItemsViewController {
-                toDoItemTableListVC.items = items
-                toDoItemTableListVC.collectionType = collectionType
-                let tableTitle = tableViewContent.collectionType
-                fillSubViewForContainerView(table: toDoItemTableListVC, title: tableTitle)
-        
-            }
-       
             
         case .SettingVC:
-            let settingStoryboard = UIStoryboard.init(name: "Setting", bundle: nil)
-            if let settingVC = settingStoryboard.instantiateViewController(withIdentifier: "StaticSettingController") as? StaticSettingController {
-                fillSubViewForContainerView(table: settingVC, title: "Setting")
-            }
+            initSettingView()
         default:
             break;
         }
@@ -233,39 +191,62 @@ class MainViewController: UIViewController  {
         
     }
     
+    // push data into table view's viewModel and present table view
+    private func initTableView(withState tableViewType: String) {
+        let toDoItemTableListStoryboard = UIStoryboard.init(name: "ItemList", bundle: nil)
+        if let toDoItemTableListVC = toDoItemTableListStoryboard.instantiateInitialViewController() as? ItemTableViewController {
+            
+            // update main view's navigation item
+            setCurrentNavigationItem(title: tableViewType)
+            // load items content into table view's viewModel
+            self.viewModel.pushItemsToTableView(withState: tableViewType, tableViewController: toDoItemTableListVC)
+            presentCurrentViewController(currentPresented: toDoItemTableListVC)
+        }
+
+    }
+    // push data into table view's viewModel and present table view
+    private func initSettingView() {
+        let settingStoryboard = UIStoryboard.init(name: "Setting", bundle: nil)
+        if let settingVC = settingStoryboard.instantiateViewController(withIdentifier: "StaticSettingController") as? StaticSettingController {
+            setCurrentNavigationItem(title: "Setting")
+            presentCurrentViewController(currentPresented: settingVC)
+            
+        }
+        
+    }
+    
+    // called by initTableView and initSettingView
+    private func presentCurrentViewController(currentPresented: UITableViewController) {
+        // record current table view controller
+        self.selectedTable = currentPresented
+        self.addChildViewController(currentPresented)
+        self.subViewContainerView.addSubview(selectedTable!.tableView)
+    }
 
     
-    public func showDemoControllerForIndex(_ selectedIndexInMenu:Int){
+    public func showItemTableForIndex(_ selectedIndexInMenu:Int){
+        
+        removeOldTableView()
+        print ("showDemoControllerForIndex: selected Index: \(selectedIndexInMenu)")
+    
+        loadTableView(type: DestinationVCType(rawValue:  selectedIndexInMenu)!)
         
         
-            self.selectedIndex = selectedIndexInMenu
-        
-        
-        
-           print ("showDemoControllerForIndex: selected Index: \(selectedIndex)")
+    }
+    
+    private func removeOldTableView() {
         if selectedTable != nil {
             selectedTable!.view.removeFromSuperview()
             selectedTable!.removeFromParentViewController()
             selectedTable = nil
         }
-        
-        
-        let destinationType = findDestinationType(index: selectedIndexInMenu)!
-        let tableViewContent = setDestinationVCContent(type: destinationType)
-        fillSubContainerView(type: destinationType, tableViewContent: tableViewContent)
-        
-        
     }
 
    
     
 
-    fileprivate func fillSubViewForContainerView (table : UITableViewController, title: String?) {
-        
-        self.selectedTable = table
-        self.addChildViewController(table)
-        self.subViewContainerView.addSubview(selectedTable!.tableView)
-        
+    fileprivate func setCurrentNavigationItem (title: String?) {
+    
         let titleLabel = UILabel.init(frame: CGRect(x:0,y:0,width:100, height: 30))
         titleLabel.text = title
         titleLabel.backgroundColor = UIColor.clear
@@ -275,21 +256,16 @@ class MainViewController: UIViewController  {
         self.navigationItem.titleView = titleLabel
         let rightItem1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(self.rightNaviBarItemActionForItemTable1))
         let rightItem2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemTable2))
-       self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.rightBarButtonItems = [rightItem1,rightItem2]
         
     }
     
+    
     func rightNaviBarItemActionForItemTable1() {
-        updateTableViewAction()
+        self.viewModel.updateTableViewAction()
     }
-    
-    let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
-    
-    func updateTableViewAction() {
-        let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
-        NotificationCenter.default.post(updateContent as Notification)
-    }
+       
     
     func rightNaviBarItemActionForItemTable2() {
         
@@ -301,6 +277,8 @@ class MainViewController: UIViewController  {
         }
     }
 
+    
+    // MARK: -  pre setting for NavigationController of itemDetailViewController
     private func setNavigationControllerForItemDetail (detailView : UIViewController) {
         
         

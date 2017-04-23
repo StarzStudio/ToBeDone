@@ -21,11 +21,19 @@ class ItemTableCell_WithoutImage: UITableViewCell {
     
     
     
-    var cellIndex : Int?
+
     var viewModel = ItemTableViewModel.sharedInstance
-     var checkedImage  : UIImage?
-     var uncheckedImage : UIImage?
-    
+    var checkedImage  : UIImage?
+    var uncheckedImage : UIImage?
+    var cellModel : ItemCellModel? {
+
+        didSet  {
+            titleLabel.text = cellModel!.title
+            noteLabel.text = cellModel!.note
+            checkedImage = UIImage(named: cellModel!.checkedImageName)! as UIImage
+            uncheckedImage = UIImage(named: cellModel!.unCheckedImageName)! as UIImage
+        }
+    }
    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var noteLabel: UILabel!
@@ -45,7 +53,7 @@ class ItemTableCell_WithoutImage: UITableViewCell {
                 }
                 selectButton.setImage(checkedImage, for: .normal)
                 
-                viewModel.actionOnSingleCell(itemCellIndex: cellIndex!, actionType: .Select)
+                viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .Select)
             } else {
                 
                 guard nil != uncheckedImage else {
@@ -54,18 +62,12 @@ class ItemTableCell_WithoutImage: UITableViewCell {
                 }
                 selectButton.setImage(uncheckedImage, for: .normal)
                 
-                viewModel.actionOnSingleCell(itemCellIndex: cellIndex!, actionType: .DisSelect)
+                viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .DisSelect)
             }
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     @IBAction func tapSelectButton(_ sender: Any) {
         
         Debug.log(message: "select button tap")
@@ -76,13 +78,13 @@ class ItemTableCell_WithoutImage: UITableViewCell {
     
     @IBAction func tapDeleteButton(_ sender: Any) {
         
-        viewModel.actionOnSingleCell(itemCellIndex: cellIndex!, actionType: .Delete)
+        viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .Delete)
         viewModel.updateTableViewAction()
     }
     
     @IBAction func tapLogButton(_ sender: Any) {
         
-        viewModel.actionOnSingleCell(itemCellIndex: cellIndex!, actionType: .Log)
+        viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .Log)
         viewModel.updateTableViewAction()
     }
     
@@ -96,8 +98,6 @@ class ItemTableCell_WithoutImage: UITableViewCell {
         initNote()
        
         
-        checkedImage = UIImage(named: viewModel.itemCellsStateCollection[cellIndex!].checkedImageName)! as UIImage
-        uncheckedImage = UIImage(named: viewModel.itemCellsStateCollection[cellIndex!].unCheckedImageName)! as UIImage
         
         //setViewContent()
         
@@ -114,8 +114,7 @@ class ItemTableCell_WithoutImage: UITableViewCell {
     }
     
     
-    
-    
+
     func initTitle () {
         titleLabel.textAlignment = NSTextAlignment.left
         titleLabel.textColor = UIColor.flatGray
@@ -123,6 +122,7 @@ class ItemTableCell_WithoutImage: UITableViewCell {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
         // automatica number of lines
         titleLabel.numberOfLines = 0
+
     }
     
     func initNote () {
@@ -132,6 +132,7 @@ class ItemTableCell_WithoutImage: UITableViewCell {
         noteLabel.font = UIFont.boldSystemFont(ofSize: 15)
         // automatica number of lines
         noteLabel.numberOfLines = 0
+
     }
     
 

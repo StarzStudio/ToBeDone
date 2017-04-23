@@ -13,7 +13,14 @@ import IGListKit
 class ItemTableCell_WithImage: ItemTableCell_WithoutImage {
     
     @IBOutlet weak var imageCollection: UICollectionView!
-    
+
+    override var cellModel : ItemCellModel? {
+        didSet {
+            titleLabel.text = cellModel!.title
+            noteLabel.text = cellModel!.note
+            imageCollection.reloadData()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         initImageCollectionView()

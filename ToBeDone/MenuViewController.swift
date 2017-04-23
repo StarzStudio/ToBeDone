@@ -31,11 +31,7 @@ extension UIColor {
 }
 
 
-struct MenuItem {
-    let name : String?
-    let image : UIImage?
-    let unfinishedNum : Int?
-}
+
 
 class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate  {
 
@@ -45,42 +41,28 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     }
     
     
-    var db = TodoItemStore.sharedInstance
+   
+    
+    
+    let DismissSegueName = "DismissMenuSegue"
 
-    
-    
- let DismissSegueName = "DismissMenuSegue"
     var menuItemIndex:Int = 0
+    
+    var viewModel = MenuViewModel.sharedInstance
+    
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     @IBOutlet weak var topBar: UINavigationBar!
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var backButtonItem: UIBarButtonItem!
     
-    let CellName  = "MenuItemCell"
     
-    var unfinishedNumDic: Dictionary<String,Int> = ["Inbox":0, "Today": 0, "Scheduled":0]
-    var menuList = [MenuItem(name: "",image: UIImage(),unfinishedNum: 0)]
+    
+    
+   
     
     let mainColor = UIColor(hex: 0xC4ABAA)
     
-    func calculateRemainingItems() {
-       let items =  db.getAllTodoItems()
-        for item in items {
-            switch item.state {
-                case "Inbox":
-                unfinishedNumDic["Inbox"] = unfinishedNumDic["Inbox"]! + 1
-                case "Today":
-                unfinishedNumDic["Today"] = unfinishedNumDic["Today"]! + 1
-                case "Scheduled":
-                unfinishedNumDic["Scheduled"] = unfinishedNumDic["Scheduled"]! + 1
-            default:
-                break
-                
-            }
-        }
-        
-        print("\(unfinishedNumDic)")
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,14 +75,9 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
         userTableView.backgroundColor = mainColor
         view.backgroundColor          = mainColor
         
-        calculateRemainingItems()
+        viewModel.updateMenuList()
         
-        menuList = [MenuItem(name: "inbox", image: UIImage(named: "inbox_menu"),unfinishedNum:  unfinishedNumDic["Inbox"]),
-                        MenuItem(name: "Today", image: UIImage(named: "today_menu"), unfinishedNum: unfinishedNumDic["Today"]) ,
-                        MenuItem(name: "Schedule", image: UIImage(named: "scheduled_menu"), unfinishedNum: unfinishedNumDic["Scheduled"]),
-                        MenuItem(name: "Logbook", image: UIImage(named: "logbook_menu"), unfinishedNum: 0),
-                        MenuItem(name: "Trash", image: UIImage(named: "trash_menu"), unfinishedNum: 0),
-                        MenuItem(name: "Setting", image: UIImage(named: "setting_menu"), unfinishedNum: 0)]
+       
         
         
     }
@@ -114,13 +91,13 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     // MARK: - UITableView DataSource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuList.count
+        return viewModel.menuList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellName) as! MenuItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell") as! MenuItemCell
         
-        let menuItem = menuList[(indexPath as NSIndexPath).row]
+        let menuItem = viewModel.menuList[(indexPath as NSIndexPath).row]
         
         cell.menuItemName.text = menuItem.name
         cell.menuItemImageView.image =  menuItem.image
@@ -139,9 +116,9 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     // MARK: - UITableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Select row at \(indexPath)")
+        Debug.log(message: "Select row at \(indexPath)")
         
-        menuItemIndex = (indexPath as NSIndexPath).row + 1
+        menuItemIndex = (indexPath as NSIndexPath).row
         performSegue(withIdentifier: DismissSegueName, sender: self)
      
         
@@ -149,15 +126,14 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         let mainViewController = segue.destination as! MainViewController
-        
-        if menuItemIndex != 0 {
-              mainViewController.showDemoControllerForIndex(menuItemIndex)
-        }
-      
+
+        mainViewController.showItemTableForIndex(menuItemIndex)
+
+
     }
-    
+
 
 
 }

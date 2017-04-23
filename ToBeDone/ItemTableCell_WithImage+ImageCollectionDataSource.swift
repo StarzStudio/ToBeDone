@@ -14,14 +14,14 @@ extension ItemTableCell_WithImage : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.itemCellsStateCollection[cellIndex!].images.count
+        return cellModel!.images.count
     }
     //cellForItemAt indexPath
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         
-        cell.imageView.image = self.viewModel.itemCellsStateCollection[cellIndex!].images[indexPath.row]
+        cell.imageView.image = cellModel!.images[indexPath.row]
 
         return cell
     }

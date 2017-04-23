@@ -27,62 +27,17 @@ extension ItemDetailViewController : UIImagePickerControllerDelegate, UINavigati
         let type = info["UIImagePickerControllerMediaType"] as! String
         if type  == (kUTTypeImage as String)  {
             let fetchedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            updateIGListDataSource(image: fetchedImage)
+            updateCollectionView(image: fetchedImage)
             
         }
         
         self.dismiss(animated: true, completion: nil)
     }
     
-    func updateIGListDataSource (image:UIImage) {
-        let IGListimageModel = IGListImageModel(image: image)
-        IGListData.append(IGListimageModel)
-        adapter.performUpdates(animated: true, completion: nil)
-        
-        // update db
-        self.viewModel.addImage(image)
-        
-        
-    }
+    func
     
-//    func storeImageToFile(image: UIImage, imageName: String) -> String?{
-//        if let data = UIImagePNGRepresentation(image) {
-//            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//            let imageName = imageName
-//            let destinationPath = documentsURL.appendingPathComponent(imageName)
-//            try? data.write(to: destinationPath)
-//            return destinationPath.absoluteString
-//        }
-//        else { return nil }
-//        
-//    }
-    
-    //    fileprivate func storeImageToDB(image: UIImage) {
-    //
-    //        let dbImageModel = ImageFile()
-    //        let imageName = dbImageModel.imageId
-    //        dbImageModel.fileURL = storeImageToFile(image: image, imageName: imageName)
-    //        dbImageModel.itemId = item.id
-    //        if isNewAddingItem == true {
-    //            item.images.append(dbImageModel)
-    //        }
-    //        else {
-    //            try! db.write {
-    //                item.images.append(dbImageModel)
-    //            }
-    //        }
-    //
-    //
-    //    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.itemTitle_TextField.isFirstResponder  == true {
-            self.itemTitle_TextField.resignFirstResponder()
-        }
-        if self.itemNote_TextView.isFirstResponder == true {
-            self.itemNote_TextView.resignFirstResponder()
-        }
-    }
+
+ 
     
     
 }

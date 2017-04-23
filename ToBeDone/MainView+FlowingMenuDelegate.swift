@@ -13,7 +13,7 @@ extension MainViewController : FlowingMenuDelegate {
     // MARK: - FlowingMenu Delegate Methods
     
     func colorOfElasticShapeInFlowingMenu(_ flowingMenu: FlowingMenuTransitionManager) -> UIColor? {
-        return mainColor
+        return UIColor(hex: 0xC4ABAA)
     }
     
     func flowingMenuNeedsPresentMenu(_ flowingMenu: FlowingMenuTransitionManager) {
@@ -22,7 +22,7 @@ extension MainViewController : FlowingMenuDelegate {
     
     func flowingMenuNeedsDismissMenu(_ flowingMenu: FlowingMenuTransitionManager) {
         menu?.performSegue(withIdentifier: DismissSegueName, sender: self)
-        showDemoControllerForIndex(self.selectedIndex)
+        self.showItemTableForIndex(self.selectedIndex)
         print ("flowingMenuNeedsDismissMenu: selected Index: \(selectedIndex)")
     }
     

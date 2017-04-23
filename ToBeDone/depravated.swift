@@ -102,7 +102,69 @@ extension ItemDetailViewController {
     //        
     
     //}
-
+    
+    
+    
+//    var IGListData : [IGListImageModel]! = [IGListImageModel(image:UIImage())]
+//    lazy var adapter: IGListAdapter = {
+//        return IGListAdapter(updater: IGListAdapterUpdater(), viewController: self, workingRangeSize: 0)
+//    }()
+//    // MARK: IGList image set
+//    
+//    
+//    
+//    fileprivate func setIGListCollectionView () {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
+//        layout.minimumInteritemSpacing = 10
+//        //    layout.sectionInset = UIEdgeInsetsMake(3, 5, 3, 5)
+//        self.IGListImageSet_CollectionView.alwaysBounceVertical = false
+//        self.IGListImageSet_CollectionView.alwaysBounceHorizontal = true
+//        self.IGListImageSet_CollectionView.collectionViewLayout = layout
+//        self.IGListImageSet_CollectionView.allowsSelection = true
+//        adapter.collectionView = self.IGListImageSet_CollectionView
+//        adapter.dataSource = self
+//        
+//    }
+//    
+//    
+//    
+//    func objects(for listAdapter: IGListAdapter) -> [IGListDiffable] {
+//        // this can be anything!
+//        return IGListData!
+//        
+//    }
+//    
+//    func listAdapter(_ listAdapter: IGListAdapter, sectionControllerFor object: Any) -> IGListSectionController {
+//        
+//        return IGListImageSectionController()
+//    }
+//    
+//    func emptyView(for listAdapter: IGListAdapter) -> UIView? {
+//        return nil
+//    }
+//    
+//    
+//    fileprivate func setIGListDataForTest () {
+//        let image1 = UIImage(named: "shoppingList1_Test")!
+//        let image2 = UIImage(named: "shoppingList2_Test")!
+//        let image3 = UIImage(named: "memo_Test")!
+//        IGListData.append(IGListImageModel(image: image1))
+//        IGListData.append(IGListImageModel(image: image2))
+//        IGListData.append(IGListImageModel(image: image3))
+//        adapter.performUpdates(animated: true, completion: nil)
+//    }
+//    
+//    func updateIGListDataSource (image:UIImage) {
+//        let IGListimageModel = IGListImageModel(image: image)
+//        IGListData.append(IGListimageModel)
+//        adapter.performUpdates(animated: true, completion: nil)
+//        
+//        // update db
+//        self.viewModel.item.images[UUID().uuidString] = image
+//        
+//        
+//    }
 }
 
 //extension ItemDetailViewController : IGLDropDownMenuDelegate{
