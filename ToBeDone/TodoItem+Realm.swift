@@ -20,15 +20,15 @@ import RealmSwift
 
 
 class ImageFile : Object {
-    dynamic  var fileURL : String?
-    dynamic var itemId : String?
+    dynamic var fileURL : String!
+    dynamic var itemId : String!
     dynamic var imageId = UUID().uuidString
-    dynamic  var firebaseFileURL : String?
+    dynamic var firebaseFileURL : String?
     
 }
 class Tag : Object {
-    dynamic var tagName : String?
-    dynamic var itemId : String?
+    dynamic var tagName : String!
+    dynamic var itemId : String!
     
 }
 
@@ -40,7 +40,7 @@ class TodoItem : Object {
     dynamic  var location : String?
     dynamic  var state : String = "Inbox"
     dynamic  var checked : Bool = false
-    dynamic var note : String! = ""
+    dynamic  var  note : String?
     var tags = List<Tag>()
     var images = List<ImageFile>()
     
