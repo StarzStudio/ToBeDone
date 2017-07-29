@@ -13,6 +13,7 @@ class TodoItemDTO {
     
     var title : String = ""
     var id : String = UUID().uuidString
+    var createdDate = ""
     var alertDate : String?
     var scheduledDate : String?
     var location : String?

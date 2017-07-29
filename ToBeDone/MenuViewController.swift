@@ -60,8 +60,8 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     
    
     
-    let mainColor = UIColor(hex: 0xC4ABAA)
-    
+   //let mainColor = UIColor(hex: 0xC4ABAA)
+    let mainColor = UIColor.flatWhite
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,7 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
         topBar.tintColor              = .black
         topBar.barTintColor           = mainColor
         topBar.titleTextAttributes    = [
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Light", size: 22)!,
+            NSFontAttributeName: UIFont(name: "Marker Felt", size: 22)!,
             NSForegroundColorAttributeName: UIColor.flatBlack
         ]
         userTableView.backgroundColor = mainColor
@@ -95,6 +95,7 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell") as! MenuItemCell
         
         let menuItem = viewModel.menuList[(indexPath as NSIndexPath).row]
@@ -106,6 +107,10 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
         } else {
              cell.unfinishedNumLabel.isHidden  = false
              cell.unfinishedNumLabel.text = menuItem.unfinishedNum?.description
+            // if this is today item, set number's color to red
+            if (indexPath as NSIndexPath).row == 1 {
+                 cell.unfinishedNumLabel.textColor = UIColor.red
+            }
         }
     
         cell.contentView.backgroundColor = mainColor

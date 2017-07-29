@@ -58,7 +58,7 @@ class MainViewController: UIViewController  {
         flowingMenuTransitionManager.setInteractivePresentationView(view)
         flowingMenuTransitionManager.delegate = self
         
-    
+        showItemTableForIndex(0);
         
         //add whole local database to firebase
         //FirebaseService.syncData()
@@ -250,28 +250,30 @@ class MainViewController: UIViewController  {
         let titleLabel = UILabel.init(frame: CGRect(x:0,y:0,width:100, height: 30))
         titleLabel.text = title
         titleLabel.backgroundColor = UIColor.clear
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 15.0)
+        titleLabel.font = UIFont(name: "Chalkboard SE", size: 20)
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = NSTextAlignment.center
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.99, green: 0.73, blue: 0.17, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationItem.titleView = titleLabel
-        let rightItem1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(self.rightNaviBarItemActionForItemTable1))
+        //let rightItem1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(self.rightNaviBarItemActionForItemTable1))
         let rightItem2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemTable2))
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.rightBarButtonItems = [rightItem1,rightItem2]
+        self.navigationItem.rightBarButtonItems = [rightItem2]
         
     }
     
     
-    func rightNaviBarItemActionForItemTable1() {
-        self.viewModel.updateTableViewAction()
-    }
-       
-    
+//    func rightNaviBarItemActionForItemTable1() {
+//        self.viewModel.updateTableViewAction()
+//    }
+//       
+//    
     func rightNaviBarItemActionForItemTable2() {
         
         let itemDetailStoryboard = UIStoryboard.init(name: "ItemDetail", bundle: nil)
         if let itemDetailVC = itemDetailStoryboard.instantiateViewController(withIdentifier: "ItemDetailViewController") as? ItemDetailViewController {
-        
+            itemDetailVC.viewModel.currentState = .Initializing
             setNavigationControllerForItemDetail(detailView: itemDetailVC)
             self.navigationController?.pushViewController(itemDetailVC, animated: true)
         }

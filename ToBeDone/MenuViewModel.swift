@@ -34,10 +34,10 @@ class MenuViewModel {
                                   unfinishedNum: 0),
                     MenuItemState(name: "Archived",
                                   image: UIImage(named: "logbook_menu"),
-                                  unfinishedNum: 0),
-                    MenuItemState(name: "Setting",
-                                  image: UIImage(named: "setting_menu"),
                                   unfinishedNum: 0)]
+//                    MenuItemState(name: "Setting",
+//                                  image: UIImage(named: "setting_menu"),
+//                                  unfinishedNum: 0)]
     }
     func updateMenuList() {
         calculateRemainingItems()

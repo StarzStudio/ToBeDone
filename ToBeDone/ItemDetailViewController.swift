@@ -23,7 +23,7 @@ class ItemDetailViewController : UIViewController{
     // MARK: @IBOutlet
     @IBOutlet weak var tagList_TagsView : RKTagsView!
     @IBOutlet weak var itemNote_TextView : FloatLabelTextView!
-    @IBOutlet weak var images_CollectionView: UICollectionView!
+   // @IBOutlet weak var images_CollectionView: UICollectionView!
     @IBOutlet weak var location_Button : imgLeftTitleRightButton!
     @IBOutlet weak var subTasks_Table: UITableView!
     @IBOutlet weak var confirm_Button : UIButton!
@@ -69,51 +69,9 @@ class ItemDetailViewController : UIViewController{
     
     
     
-    var viewModel = ItemDetailViewModel.sharedInstance {
-        didSet {
-            initializeAllfieldsData()
-        }
-    }
+    var viewModel = ItemDetailViewModel.sharedInstance
     
-    fileprivate func initializeAllfieldsData() {
-        self.itemNote_TextView.text = viewModel.item.note
-        self.itemTitle_TextField.text =  viewModel.item.title
-        if let date = viewModel.item.scheduledDate {
-            self.dueDate_Label.text = date
-            self.dueDate_Label.isHidden = false
-            self.dueDate_ImageView.isHidden = false
-        }
-        
-        if let date = viewModel.item.alertDate {
-            self.alertTime_Label.text = date
-            self.alertTime_Label.isHidden = false
-            self.alertTime_ImageView.isHidden = false
-        }
-        
-        
-            for tag in viewModel.item.tags {
-                self.tagList_TagsView.addTag(tag)
-            }
-        
-        
-        
-        
-            for image in viewModel.item.images.values {
-                
-//                let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-//                let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
-//                let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-//                if let dirPath          = paths.first
-//                {
-//                    let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageView.imageId)
-//                    let image    = UIImage(contentsOfFile: imageURL.path)
-                    IGListData.append(IGListImageModel(image: image))
-                    adapter.performUpdates(animated: true, completion: nil)
-                
-            }
-        
-    }
-    
+
 
     // MARK: - Life cycle
 
@@ -125,12 +83,20 @@ class ItemDetailViewController : UIViewController{
         setItemTitle()
         setItemNote()
         setLocationButton()
+        self.location_Button.isHidden = true
         setDropDownMenu()
       
         setHidedItems()
         setConfirmBotton()
         
         notificationCenterSetup()
+        
+        switch viewModel.currentState {
+        case .Modifing:
+            updateItemDetailViewContent()
+        case .Initializing:
+            viewModel.clean()
+        }
         
     }
     
@@ -145,7 +111,9 @@ class ItemDetailViewController : UIViewController{
     }
 
     func tapConfirmButton (_ sender:UIButton) {
-        Debug.log(message: "confirm button tapped")
+        
+        
+        // Debug.log(message: "confirm button tapped")
         
         
         // set notification if alert date has been set
@@ -157,11 +125,13 @@ class ItemDetailViewController : UIViewController{
         viewModel.item.tags = self.tagList_TagsView.tags;
         
         
-        notify()
+        if notify() == true {
+            
+            self.navigationController?.popViewController(animated: true)
+            self.viewModel.updateTableViewAction()
+
+        }
         
-        self.navigationController?.popViewController(animated: true)
-        
-        self.viewModel.updateTableViewAction()
     }
     
 
@@ -176,6 +146,7 @@ class ItemDetailViewController : UIViewController{
         let pinSwitchOff = NSNotification.Name(rawValue:"pinSwitchOff")
         
         NotificationCenter.default.addObserver(self, selector:#selector(hiderLocatonButton), name: pinSwitchOff, object: nil)
+        
         
     }
     
@@ -218,7 +189,11 @@ class ItemDetailViewController : UIViewController{
         weak var weakSelf = self
         
         self.viewModel.getLocationCentent() { (placeName) -> Void in
-            weakSelf!.location_Button.setTitle(newTitle: placeName)
+            // if user switch back to the table view before the location update, then self will be nil.
+            if let validWeakSelf = weakSelf {
+                validWeakSelf.location_Button.setTitle(newTitle: placeName)
+            }
+
         }
         
         
@@ -253,7 +228,7 @@ class ItemDetailViewController : UIViewController{
         self.tagList_TagsView.textField.placeholder = self.viewModel.defaultTagsContent
         self.tagList_TagsView.textField.returnKeyType = .done
         self.tagList_TagsView.textField.delegate = self
-        self.tagList_TagsView.textField.font = UIFont.boldSystemFont(ofSize: 15)
+        self.tagList_TagsView.textField.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
         self.tagList_TagsView.textField.textAlignment = .left
         self.tagList_TagsView.textField.backgroundColor = UIColor.white
         self.tagList_TagsView.textField .textColor = .flatBlack
@@ -281,8 +256,10 @@ class ItemDetailViewController : UIViewController{
         self.itemTitle_TextField.textAlignment = NSTextAlignment.left
         self.itemTitle_TextField.allowsEditingTextAttributes = true
         self.itemTitle_TextField.textColor = UIColor.darkGray
+        self.itemTitle_TextField.titleTextColour = UIColor.darkGray
+        self.itemTitle_TextField.titleActiveTextColour = UIColor.darkGray
         self.itemTitle_TextField.backgroundColor = UIColor.clear
-        self.itemTitle_TextField.font = UIFont.boldSystemFont(ofSize: 15)
+        self.itemTitle_TextField.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
         self.itemTitle_TextField.returnKeyType = UIReturnKeyType.done
         self.itemTitle_TextField.autocorrectionType = UITextAutocorrectionType.yes
         self.itemTitle_TextField.autocapitalizationType = UITextAutocapitalizationType.sentences
@@ -297,14 +274,17 @@ class ItemDetailViewController : UIViewController{
         self.itemNote_TextView.textAlignment = NSTextAlignment.left
         self.itemNote_TextView.allowsEditingTextAttributes = true
         self.itemNote_TextView.textColor = UIColor.darkGray
-        self.itemNote_TextView.backgroundColor = UIColor.flatWhite
-        self.itemNote_TextView.font = UIFont.boldSystemFont(ofSize: 18)
+        self.itemNote_TextView.titleTextColour = UIColor.darkGray
+        self.itemNote_TextView.titleActiveTextColour = UIColor.darkGray
+        self.itemNote_TextView.backgroundColor = UIColor.clear
+        self.itemNote_TextView.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
         self.itemNote_TextView.returnKeyType = UIReturnKeyType.done
         self.itemNote_TextView.autocorrectionType = UITextAutocorrectionType.yes
         self.itemNote_TextView.autocapitalizationType = UITextAutocapitalizationType.sentences
         self.itemNote_TextView.keyboardAppearance = UIKeyboardAppearance.dark
         self.itemNote_TextView.delegate = self
         self.itemNote_TextView.layer.cornerRadius  = 4.0
+
         self.view.addSubview(self.itemNote_TextView)
         
     }
@@ -328,7 +308,47 @@ class ItemDetailViewController : UIViewController{
             self.itemNote_TextView.resignFirstResponder()
         }
     }
+    
+    
+    
+    
+    func updateItemDetailViewContent() {
+        let itemDTO = self.viewModel.item
+        itemTitle_TextField.text = itemDTO.title
+        itemNote_TextView.text = itemDTO.note
+        if let scheduleDate = itemDTO.scheduledDate {
+            self.dueDate_Label.isHidden = false
+            self.dueDate_ImageView.isHidden = false
+            dueDate_Label.text = scheduleDate
 
+        }
+        
+        if let alertDate = itemDTO.alertDate {
+            self.alertTime_Label.isHidden = false
+            self.alertTime_Label.isHidden = false
+            dueDate_Label.text = alertDate
+            
+        }
+        for tag in viewModel.item.tags {
+            self.tagList_TagsView.addTag(tag)
+        }
+        
+        
+        //            for image in viewModel.item.images.values {
+        //
+        //                let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        //                let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        //                let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        //                if let dirPath          = paths.first
+        //                {
+        //                    let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(imageView.imageId)
+        //                    let image    = UIImage(contentsOfFile: imageURL.path)
+        //                    IGListData.append(IGListImageModel(image: image))
+        //                    adapter.performUpdates(animated: true, completion: nil)
+        //                
+        //            }
+   
+    }
     
 }
 

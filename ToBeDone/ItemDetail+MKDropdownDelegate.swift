@@ -23,20 +23,20 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
         let alertButtonView = Bundle.main.loadNibNamed("CustomToolButtonView", owner: nil, options: nil)?.first as! CustomToolButtonView
         alertButton = alertButtonView.button
         alertImage = alertButtonView.image
-        let addPhotoButtonView = Bundle.main.loadNibNamed("CustomToolButtonView", owner: nil, options: nil)?.first as! CustomToolButtonView
-        addPictureButton = addPhotoButtonView.button
-        addPhotoImage = addPhotoButtonView.image
-        let pinView = Bundle.main.loadNibNamed("PinSelectionMenuItem", owner: nil, options: nil)?.first as! PinSelectionMenuItem
+//        let addPhotoButtonView = Bundle.main.loadNibNamed("CustomToolButtonView", owner: nil, options: nil)?.first as! CustomToolButtonView
+//        addPictureButton = addPhotoButtonView.button
+//        addPhotoImage = addPhotoButtonView.image
+       // let pinView = Bundle.main.loadNibNamed("PinSelectionMenuItem", owner: nil, options: nil)?.first as! PinSelectionMenuItem
         
         
-        setAddPictureButton()
+       //setAddPictureButton()
         setDatePicker()
         setAlertButton()
         
         rowItems.append(dateButtonView)
         rowItems.append(alertButtonView)
-        rowItems.append(addPhotoButtonView)
-        rowItems.append(pinView)
+        //rowItems.append(addPhotoButtonView)
+       // rowItems.append(pinView)
     }
     
     
@@ -99,7 +99,8 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
             if let userSelectedDate = date {
                 
                 let pickedDate  = DateUtilities.stringFrom(date: userSelectedDate)
-                weakSelf!.dateTimeButton.setTitle(pickedDate, for: .normal)
+                // dateTimeButton in the menu shall still appear as "Due date"
+                //weakSelf!.dateTimeButton.setTitle(pickedDate, for: .normal)
                 weakSelf!.dueDate_Label.text = pickedDate
                 weakSelf!.dueDate_Label.isHidden = false
                 weakSelf!.dueDate_ImageView.isHidden = false
@@ -112,9 +113,9 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
                 
                 let date = userSelectedDate
                 if date.isToday()  == true {
-                    weakSelf!.viewModel.item.scheduledDate = "Today"
+                    weakSelf!.viewModel.item.state = "Today"
                 } else {
-                    weakSelf!.viewModel.item.scheduledDate = "Scheduled"
+                    weakSelf!.viewModel.item.state = "Scheduled"
                 }
                 
             }
@@ -148,7 +149,7 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
         self.alertView.show("Alert Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel") { _ in
             
             let selectedAlertOption = weakSelf!.alertView.alertChoiceTable.selectedAlertOption
-            weakSelf!.alertButton.setTitle(selectedAlertOption, for: .normal)
+            //weakSelf!.alertButton.setTitle(selectedAlertOption, for: .normal)
             weakSelf!.alertTime_Label.text = selectedAlertOption
             weakSelf!.alertTime_Label.isHidden = false
             weakSelf!.alertTime_ImageView.isHidden = false
@@ -197,21 +198,21 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
     
     
     // MARK: - addPhotoButton
-    func setAddPictureButton () {
-        
-        
-        addPictureButton.setTitle("Picture", for: .normal)
-        addPhotoImage.image = UIImage(named:"addPicture_itemDetail")
-        addPhotoImage.contentMode = .scaleAspectFit
-        self.addPictureButton.addTarget(self, action: #selector(self.tapAddPictureButton) , for: .touchUpInside)
-        
-    }
+//    func setAddPictureButton () {
+//        
+//        
+//        addPictureButton.setTitle("Picture", for: .normal)
+//        addPhotoImage.image = UIImage(named:"addPicture_itemDetail")
+//        addPhotoImage.contentMode = .scaleAspectFit
+//        self.addPictureButton.addTarget(self, action: #selector(self.tapAddPictureButton) , for: .touchUpInside)
+//        
+//    }
+//    
     
-    
-    func tapAddPictureButton () {
-        triggerPictureAlubm()
-    }
-    
+//    func tapAddPictureButton () {
+//        triggerPictureAlubm()
+//    }
+//    
     // MARK: - location pin
     func setLocatonPin() {
         

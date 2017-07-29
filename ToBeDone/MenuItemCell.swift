@@ -27,7 +27,8 @@ final class MenuItemCell: UITableViewCell {
         super.layoutSubviews()
         
         contentView.layoutSubviews()
-        menuItemImageView.layer.cornerRadius = menuItemImageView.bounds.width / 2
+       // set cornerRadius when a round image is wanted
+        // menuItemImageView.layer.cornerRadius = menuItemImageView.bounds.width / 2
         unfinishedNumLabel.layer.cornerRadius      = unfinishedNumLabel.bounds.width / 2
     }
 }

@@ -46,7 +46,8 @@ class ItemTableViewController: UITableViewController {
         //following two lines codes aim to eliminate extra separators
         tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
-        tableView.backgroundColor = UIColor.flatGray
+        
+        tableView.backgroundColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:1.0)
     }
 
 
@@ -82,11 +83,13 @@ class ItemTableViewController: UITableViewController {
     fileprivate func notificationCenterSetup() {
         let updateTableView = NSNotification.Name(rawValue: "updateTableView")
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: updateTableView, object: nil)
+        
+        
     }
-
+    
     func reloadTable() {
         tableView.reloadData()
-         self.viewModel.updateData()
+        self.viewModel.updateData()
     }
 }
     

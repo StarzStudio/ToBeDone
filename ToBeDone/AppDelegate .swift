@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let item1 = TodoItemDTO()
         item1.title = "Buy milk"
         item1.state = "Inbox"
+        item1.tags = ["errands", "life"]
         item1.note = "Buy some organic milk"
         
         // scheduled
@@ -97,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let item35 = TodoItemDTO()
         item35.title = "Ask Fedilis"
         item35.state = "Today"
-        item35.note  = "Get to know which area does the Fedilis insurance company covered"
+        item35.note  = "Get to know which area does the Fedilis insurance company covered covered covered covered covered covered covered covered covered "
         
         item35.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
         

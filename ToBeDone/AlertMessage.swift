@@ -23,5 +23,25 @@ class AlertMessage {
         config.interactiveHide = false
         SwiftMessages.show(config: config, view: view)
     }
+    
+    
+    class func successStatusline(body: String) {
+        let view = MessageView.viewFromNib(layout: .StatusLine)
+        
+        view.configureTheme(.success)
+        view.configureDropShadow()
+        view.configureContent(body: body)
+        var config = SwiftMessages.Config()
+       // config.presentationStyle = .top
+       //  config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .seconds(seconds: 2)
+        config.dimMode = .gray(interactive: true)
+        config.interactiveHide = false
+        SwiftMessages.show(config: config, view: view)
+
+    }
+    
+    
+    
 
 }

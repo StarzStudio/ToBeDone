@@ -18,7 +18,7 @@ extension ItemDetailViewController: MKDropdownMenuDataSource {
     }
     
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        return 2
     }
     
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, rowHeightForComponent component: Int) -> CGFloat {
@@ -28,12 +28,12 @@ extension ItemDetailViewController: MKDropdownMenuDataSource {
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, attributedTitleForComponent component: Int) -> NSAttributedString? {
         
         return NSAttributedString.init(string: "Tools",
-                                       attributes:  [NSFontAttributeName: UIFont.systemFont(ofSize: 14, weight: UIFontWeightLight), NSForegroundColorAttributeName: UIColor.flatBlack])
+                                       attributes:  [NSFontAttributeName: UIFont.init(name: "Chalkboard SE", size: 17)!, NSForegroundColorAttributeName: UIColor.flatBlack])
     }
     
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, attributedTitleForSelectedComponent component: Int) -> NSAttributedString? {
         return NSAttributedString.init(string: "Tools",
-                                       attributes:  [NSFontAttributeName: UIFont.systemFont(ofSize: 14, weight: UIFontWeightLight), NSForegroundColorAttributeName: UIColor.flatBlack])
+                                       attributes:  [NSFontAttributeName: UIFont.init(name: "Chalkboard SE", size: 17)!, NSForegroundColorAttributeName: UIColor.flatBlack])
         
     }
     

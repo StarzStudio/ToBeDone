@@ -13,6 +13,7 @@ enum ActionOnCellType {
     case Delete
     case Select
     case DisSelect
+    case Restore
 }
 
 class ItemTableViewModel {
@@ -31,7 +32,6 @@ class ItemTableViewModel {
     }
     
     var itemCellModelsCollection = [ItemCellModel]()
-    private let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
     
     
     
@@ -45,6 +45,10 @@ class ItemTableViewModel {
             itemModel.title = item.title
             itemModel.note = item.note
             itemModel.state = item.state
+            itemModel.tags = item.tags
+            itemModel.createdDate = item.createdDate
+            itemModel.scheduledDate = item.scheduledDate
+            itemModel.alertDate = item.alertDate
             itemModel.images = Array( item.images.values)
             itemCellModelsCollection.append(itemModel)
         }
@@ -59,6 +63,7 @@ class ItemTableViewModel {
             updateItemsState(newState: "Archived")
         case .Delete:
             updateItemsState(newState: "Trash")
+    
         default:
             break
         }
@@ -71,25 +76,36 @@ class ItemTableViewModel {
         switch actionType {
         case .Log:
             updateItemState(item: item, newState: "Archived")
+            AlertMessage.successStatusline(body:  "Logged the stick successfully!")
         case .Delete:
             updateItemState(item: item, newState: "Trash")
         case .Select:
             self.itemCellModelsCollection[itemCellIndex].isChecked = true
         case .DisSelect:
             self.itemCellModelsCollection[itemCellIndex].isChecked = false
+        case .Restore:
+            updateItemState(item: item, newState: "Inbox")
+            AlertMessage.successStatusline(body:  "Restored the stick successfully!")
+
+
         }
          updateTableViewAction()
     }
     
+    private let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
+
     func updateTableViewAction() {
         let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
         NotificationCenter.default.post(updateContent as Notification)
     }
     
     
+   
+    
+    
     
     // change all selected item cells' items' state
-    private func updateItemsState (newState : String) {
+    fileprivate func updateItemsState (newState : String) {
         for (itemIndex, ItemCellModel) in itemCellModelsCollection.enumerated() {
             if ItemCellModel.isChecked == true {
                 let selectedItem = itemsCollection[itemIndex]
@@ -99,7 +115,8 @@ class ItemTableViewModel {
         }
     }
     
-    private func updateItemState (item : TodoItemDTO, newState : String) {
+    
+    fileprivate func updateItemState (item : TodoItemDTO, newState : String) {
         item.state =  newState
         itemStore.update(item: item)
        

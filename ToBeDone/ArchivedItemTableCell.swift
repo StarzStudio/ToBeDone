@@ -13,7 +13,12 @@ class ArchivedItemTableCell: UITableViewCell {
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
-
+    @IBOutlet var restoreButton :UIButton!
+    
+    
+    var viewModel = ItemTableViewModel.sharedInstance
+    
+    
     var cellModel : ItemCellModel? {
         didSet {
             dateLabel.text = cellModel!.createdDate
@@ -31,10 +36,11 @@ class ArchivedItemTableCell: UITableViewCell {
         super.awakeFromNib()
         initTitleLabel()
         initDateLabel()
+        initRestoreButton()
         
     }
     
-    private func initTitleLabel () {
+    fileprivate func initTitleLabel () {
         titleLabel.textAlignment = NSTextAlignment.left
         titleLabel.textColor = UIColor.flatGray
         titleLabel.backgroundColor = UIColor.clear
@@ -44,7 +50,11 @@ class ArchivedItemTableCell: UITableViewCell {
 
     }
     
-    private func initDateLabel() {
+    fileprivate func initRestoreButton() {
+         self.restoreButton.addTarget(self, action: #selector(self.tapRestoreButton) , for: .touchUpInside)
+    }
+    
+    fileprivate func initDateLabel() {
         dateLabel.textAlignment = NSTextAlignment.left
         dateLabel.textColor = UIColor.flatGray
         dateLabel.backgroundColor = UIColor.clear
@@ -53,6 +63,17 @@ class ArchivedItemTableCell: UITableViewCell {
         dateLabel.numberOfLines = 0
 
     }
+    
+    func tapRestoreButton() {
+        viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .Restore)
+        
+        
+        viewModel.updateTableViewAction()
+
+    }
+    
+    
+    
     
     
 

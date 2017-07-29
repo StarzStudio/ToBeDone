@@ -18,13 +18,17 @@ enum ItemCellType {
 class ItemCellModel {
     var cellIndex : Int?
     var isChecked = false;
-    var createdDate : String?
+    var createdDate : String = ""
+    var scheduledDate : String?
+    var alertDate : String?
     var state : String?
     var title : String = ""
+    var tags : [String]?
     var note : String?
     var images = [UIImage]()
     var checkedImageName : String = "ic_CheckedCheckBox"
     var unCheckedImageName : String = "ic_UncheckedCheckBox"
+
     
     var cellType : ItemCellType {
         get {

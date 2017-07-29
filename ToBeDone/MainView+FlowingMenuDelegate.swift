@@ -13,7 +13,8 @@ extension MainViewController : FlowingMenuDelegate {
     // MARK: - FlowingMenu Delegate Methods
     
     func colorOfElasticShapeInFlowingMenu(_ flowingMenu: FlowingMenuTransitionManager) -> UIColor? {
-        return UIColor(hex: 0xC4ABAA)
+//        return UIColor(hex: 0xC4ABAA)
+        return UIColor(red: 0.99, green: 0.73, blue: 0.17, alpha: 1)
     }
     
     func flowingMenuNeedsPresentMenu(_ flowingMenu: FlowingMenuTransitionManager) {

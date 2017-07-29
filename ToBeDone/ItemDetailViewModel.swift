@@ -29,21 +29,30 @@ class ItemDetailViewModel : Observer {
     static var sharedInstance = ItemDetailViewModel()
     
     // Const 
-    let defaultTitleContent = "title..."
-    let defaultNoteContent = "Note..."
+    let defaultTitleContent = "Title..."
+    let defaultNoteContent = "Take a note..."
     let defaultPlaceContent = ""
     let defaultTagsContent = "Add tag..."
     
     
-    private var itemStore = TodoItemStore.sharedInstance
+    
     internal var currentState = State.Initializing
-    private var itemDTO = TodoItemDTO()
+    private var itemDTO : TodoItemDTO? {
+        didSet {
+            switch currentState {
+            case .Modifing:
+                updateItemDetailViewAction()
+            default:
+                return
+            }
+        }
+    }
     private var todoItemStore = TodoItemStore.sharedInstance
     private let locationService = LocationService.sharedInstance
     
     var item : TodoItemDTO {
         get {
-            return itemDTO
+            return itemDTO!
         }
         
     }
@@ -57,6 +66,7 @@ class ItemDetailViewModel : Observer {
         // replace the default item
         itemDTO = in_item;
         currentState = State.Modifing
+        
     }
     
 
@@ -90,11 +100,11 @@ class ItemDetailViewModel : Observer {
     }
     
     func updateState()  {
-        todoItemStore.update(item: itemDTO)
+        todoItemStore.update(item: itemDTO!)
     }
     
     func detectErrorsBeforePersistence () -> ResultSavingItem {
-        if itemDTO.title == "" {
+        if itemDTO!.title == "" {
             return ResultSavingItem.Failure(.FailNoTitleProvided)
         } else {
             return ResultSavingItem.Success
@@ -102,7 +112,7 @@ class ItemDetailViewModel : Observer {
     }
     private func localServiceStorage() {
         // add item into local  database
-        todoItemStore.add(item: itemDTO)
+        todoItemStore.add(item: itemDTO!)
     }
     
     private func remoteServiceStorage() {
@@ -118,7 +128,7 @@ class ItemDetailViewModel : Observer {
         
         locationService.getCurrentPlaceName(placeNameDisplayMode: .concise) { (generatedPlaceName) -> Void in
         
-            self.itemDTO.location = generatedPlaceName
+            self.itemDTO!.location = generatedPlaceName
             if let unwrapped_generatedPlaceName = generatedPlaceName {
                 completionHandler(unwrapped_generatedPlaceName)
             }
@@ -141,5 +151,13 @@ class ItemDetailViewModel : Observer {
         let updateContent = NSNotification(name: updateTableViewNotifiName, object: self)
         NotificationCenter.default.post(updateContent as Notification)
     }
+    
+    let updateItemDetailViewNotifiName = NSNotification.Name(rawValue:"updateItemDetailView")
+    
+    func updateItemDetailViewAction() {
+        let updateContent = NSNotification(name: updateItemDetailViewNotifiName, object: self)
+        NotificationCenter.default.post(updateContent as Notification)
+    }
+    
   
 }
