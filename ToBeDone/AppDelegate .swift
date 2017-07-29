@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // fill realm db for test purpose
 
-        fillDBWithTestData()
+        //fillDBWithTestData()
 
         
      //   FirebaseService.syncData()

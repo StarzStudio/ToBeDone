@@ -14,7 +14,7 @@ extension ItemDetailViewController: UITextViewDelegate {
         
         self.itemTitle_TextField.resignFirstResponder()
         
-        self.viewModel.item.title = textView.text
+        self.viewModel.item.note = textView.text
         
     }
     

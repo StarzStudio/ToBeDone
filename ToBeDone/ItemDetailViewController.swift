@@ -121,6 +121,11 @@ class ItemDetailViewController : UIViewController{
             NotificationService.addLocalNotification(with: viewModel.item.alertDate!, on: alertDate)
         }
         
+        // call end text editing for text field and text view
+        textViewDidEndEditing(self.itemNote_TextView)
+        textFieldDidEndEditing(self.itemTitle_TextField)
+        
+        
         // store tags:
         viewModel.item.tags = self.tagList_TagsView.tags;
         
@@ -319,14 +324,14 @@ class ItemDetailViewController : UIViewController{
         if let scheduleDate = itemDTO.scheduledDate {
             self.dueDate_Label.isHidden = false
             self.dueDate_ImageView.isHidden = false
-            dueDate_Label.text = scheduleDate
+            self.dueDate_Label.text = scheduleDate
 
         }
         
         if let alertDate = itemDTO.alertDate {
             self.alertTime_Label.isHidden = false
-            self.alertTime_Label.isHidden = false
-            dueDate_Label.text = alertDate
+            self.alertTime_ImageView.isHidden = false
+            self.alertTime_Label.text = alertDate
             
         }
         for tag in viewModel.item.tags {
