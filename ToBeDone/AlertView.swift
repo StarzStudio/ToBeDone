@@ -17,7 +17,7 @@ private extension Selector {
 }
 
 open class AlertView: UIView {
-    public typealias DatePickerCallback = ( Date? ) -> Void
+    public typealias DatePickerCallback = ( Int ) -> Void
     
     // MARK: - Constants
     private let kDatePickerDialogDefaultButtonHeight:       CGFloat = 50
@@ -231,9 +231,9 @@ open class AlertView: UIView {
     
     func buttonTapped(sender: UIButton!) {
         if sender.tag == kDatePickerDialogDoneButtonTag {
-            self.callback?( nil)
+            self.callback?(0)
         } else {
-            self.callback?(nil)
+            self.callback?(1)
         }
         
         close()

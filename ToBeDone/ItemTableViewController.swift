@@ -88,8 +88,9 @@ class ItemTableViewController: UITableViewController {
     }
     
     func reloadTable() {
-        tableView.reloadData()
         self.viewModel.updateData()
+        tableView.reloadData()
+        
     }
 }
     
