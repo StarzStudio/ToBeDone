@@ -254,10 +254,11 @@ class MainViewController: UIViewController  {
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = NSTextAlignment.center
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.99, green: 0.73, blue: 0.17, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.black
+     //   self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationItem.titleView = titleLabel
         //let rightItem1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(self.rightNaviBarItemActionForItemTable1))
         let rightItem2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemTable2))
+        rightItem2.tintColor = UIColor.black
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.rightBarButtonItems = [rightItem2]
         
