@@ -269,6 +269,7 @@ class ItemDetailViewController : UIViewController{
         self.itemTitle_TextField.autocorrectionType = UITextAutocorrectionType.yes
         self.itemTitle_TextField.autocapitalizationType = UITextAutocapitalizationType.sentences
         self.itemTitle_TextField.keyboardAppearance = UIKeyboardAppearance.dark
+        self.itemTitle_TextField.autocapitalizationType = .words
         self.itemTitle_TextField.delegate = self
         self.view.addSubview(self.self.itemTitle_TextField)
     }
@@ -283,13 +284,13 @@ class ItemDetailViewController : UIViewController{
         self.itemNote_TextView.titleActiveTextColour = UIColor.darkGray
         self.itemNote_TextView.backgroundColor = UIColor.clear
         self.itemNote_TextView.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
-        self.itemNote_TextView.returnKeyType = UIReturnKeyType.done
+        //self.itemNote_TextView.returnKeyType = UIReturnKeyType.search
         self.itemNote_TextView.autocorrectionType = UITextAutocorrectionType.yes
         self.itemNote_TextView.autocapitalizationType = UITextAutocapitalizationType.sentences
         self.itemNote_TextView.keyboardAppearance = UIKeyboardAppearance.dark
         self.itemNote_TextView.delegate = self
         self.itemNote_TextView.layer.cornerRadius  = 4.0
-
+        self.itemNote_TextView.autocapitalizationType = .sentences
         self.view.addSubview(self.itemNote_TextView)
         
     }
@@ -306,12 +307,14 @@ class ItemDetailViewController : UIViewController{
        
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.itemTitle_TextField.isFirstResponder  == true {
-            self.itemTitle_TextField.resignFirstResponder()
-        }
-        if self.itemNote_TextView.isFirstResponder == true {
-            self.itemNote_TextView.resignFirstResponder()
-        }
+        
+        self.view.endEditing(true)
+//        if self.itemTitle_TextField.isFirstResponder  == true {
+//            self.itemTitle_TextField.resignFirstResponder()
+//        }
+//        if self.itemNote_TextView.isFirstResponder == true {
+//            self.itemNote_TextView.resignFirstResponder()
+//        }
     }
     
     
