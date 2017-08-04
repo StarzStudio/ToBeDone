@@ -34,7 +34,7 @@ class ItemCellModel {
         get {
             if images.count > 0 {
                 return .NormalCellWithImages
-            } else if  state == "Archived" {
+            } else if state == "Archived" {
                 return .ArchivedCell
             } else {
                 return .NormailCellWithoutImages

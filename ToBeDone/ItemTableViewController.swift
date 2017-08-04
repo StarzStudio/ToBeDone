@@ -48,6 +48,11 @@ class ItemTableViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
         
         tableView.backgroundColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:1.0)
+        
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
+        
+        
     }
 
 

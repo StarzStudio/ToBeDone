@@ -295,6 +295,8 @@ class MainViewController: UIViewController  {
         
         //  let rightItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemDetail))
         let leftItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(self.leftNaviBarItemActionForItemDetail))
+        
+        leftItem.tintColor = UIColor.black
         detailView.navigationItem.rightBarButtonItem = nil
         detailView.navigationItem.leftBarButtonItem = leftItem
     }

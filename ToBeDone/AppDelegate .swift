@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //fillDBWithTestData()
 
-        
+        dbManager.printDBFilePath()
      //   FirebaseService.syncData()
     
         return true
