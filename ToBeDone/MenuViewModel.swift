@@ -47,6 +47,8 @@ class MenuViewModel {
         menuList[0].unfinishedNum = db.queryItems(withState: "Inbox").count
         menuList[1].unfinishedNum = db.queryItems(withState: "Today").count
         menuList[2].unfinishedNum = db.queryItems(withState: "Scheduled").count
+        menuList[3].unfinishedNum = db.queryItems(withState: "Archived").count
+
     }
     
     

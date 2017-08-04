@@ -172,7 +172,7 @@ class MainViewController: UIViewController  {
             tableViewState = "Inbox"
             initTableView(withState: tableViewState)
         case .ScheduledTableVC:
-            tableViewState = "Scheduled"
+            tableViewState = "Schedule"
             initTableView(withState: tableViewState)
         case .TodayTableVC:
             tableViewState = "Today"

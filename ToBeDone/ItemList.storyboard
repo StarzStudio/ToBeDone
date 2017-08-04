@@ -490,11 +490,11 @@
                                 <rect key="frame" x="2" y="2" width="371" height="663"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0Y-QG-u9S" customClass="TagListView" customModule="TagListView">
-                                        <rect key="frame" x="0.0" y="0.0" width="371" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="16"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bUQ-qD-mYV" customClass="IGListCollectionView">
-                                        <rect key="frame" x="0.0" y="17" width="371" height="323.5"/>
+                                        <rect key="frame" x="0.0" y="16" width="371" height="324"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vng-4U-A2E">
                                             <size key="itemSize" width="313" height="309"/>
@@ -523,7 +523,7 @@
                                         </cells>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-vX-z2i" customClass="FloatLabelTextView" customModule="ToBeDone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="340.5" width="371" height="322.5"/>
+                                        <rect key="frame" x="0.0" y="340" width="371" height="323"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
