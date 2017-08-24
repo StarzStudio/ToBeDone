@@ -114,17 +114,6 @@
                                 </constraints>
                                 <state key="normal" title="Confirm" image="confirmButton_itemDetail"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwh-45-wSN" customClass="imgLeftTitleRightButton" customModule="ToBeDone" customModuleProvider="target">
-                                <rect key="frame" x="12" y="486" width="477" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="477" id="H3W-P1-L0V"/>
-                                    <constraint firstAttribute="height" constant="15" id="t0N-Zu-0VI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="location">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -132,7 +121,6 @@
                             <constraint firstItem="q2D-6u-IFO" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="8" id="20k-oh-WTy"/>
                             <constraint firstItem="yFX-R0-B9A" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="12" id="2D8-Jo-0d3"/>
                             <constraint firstItem="vei-QM-Eal" firstAttribute="top" secondItem="IJb-X4-c1U" secondAttribute="bottom" constant="8" id="2dL-BP-e0H"/>
-                            <constraint firstItem="zwh-45-wSN" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="12" id="4au-bu-8FR"/>
                             <constraint firstItem="19g-HK-Dr8" firstAttribute="top" secondItem="jQD-cI-ADW" secondAttribute="bottom" constant="32" id="98j-RI-Rox"/>
                             <constraint firstItem="Jcv-bx-puk" firstAttribute="centerX" secondItem="3ae-y3-bjE" secondAttribute="centerX" id="9tC-W9-HoK"/>
                             <constraint firstAttribute="trailing" secondItem="q2D-6u-IFO" secondAttribute="trailing" constant="6" id="DPX-eJ-R93"/>
@@ -144,8 +132,6 @@
                             <constraint firstItem="q2D-6u-IFO" firstAttribute="top" secondItem="9iH-CF-b03" secondAttribute="bottom" constant="8" id="Qam-2i-OhZ"/>
                             <constraint firstItem="jQD-cI-ADW" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="7" id="ROp-nT-Uvp"/>
                             <constraint firstItem="WSb-68-AvI" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="15" id="SAI-ff-yxN"/>
-                            <constraint firstItem="Jcv-bx-puk" firstAttribute="top" secondItem="uc4-XR-Dfx" secondAttribute="bottom" constant="50" id="Tvu-d1-PwC"/>
-                            <constraint firstItem="zwh-45-wSN" firstAttribute="top" secondItem="uc4-XR-Dfx" secondAttribute="bottom" constant="8" id="aLT-OU-srg"/>
                             <constraint firstAttribute="trailing" secondItem="19g-HK-Dr8" secondAttribute="trailing" constant="6" id="amb-Xu-W5M"/>
                             <constraint firstItem="uc4-XR-Dfx" firstAttribute="leading" secondItem="yFX-R0-B9A" secondAttribute="trailing" constant="8" id="dNW-TD-Q3s"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H6l-3x-vUf" secondAttribute="trailing" constant="6" id="gLz-NW-8rn"/>
@@ -159,6 +145,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="uc4-XR-Dfx" secondAttribute="trailing" constant="6" id="w4N-gB-gZl"/>
                             <constraint firstItem="uc4-XR-Dfx" firstAttribute="top" secondItem="H6l-3x-vUf" secondAttribute="bottom" constant="8" id="w9a-er-Shu"/>
                             <constraint firstItem="19g-HK-Dr8" firstAttribute="leading" secondItem="3ae-y3-bjE" secondAttribute="leading" constant="8" id="y49-39-zD7"/>
+                            <constraint firstItem="UwR-h7-UNF" firstAttribute="top" secondItem="Jcv-bx-puk" secondAttribute="bottom" constant="35" id="yiT-mV-QAQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3XL-fK-G4M">
@@ -175,7 +162,6 @@
                         <outlet property="dueDate_Label" destination="H6l-3x-vUf" id="evr-80-Jc4"/>
                         <outlet property="itemNote_TextView" destination="19g-HK-Dr8" id="u07-vL-Jw1"/>
                         <outlet property="itemTitle_TextField" destination="q2D-6u-IFO" id="Z1u-z1-be9"/>
-                        <outlet property="location_Button" destination="zwh-45-wSN" id="pid-ub-SIX"/>
                         <outlet property="tagList_TagsView" destination="vei-QM-Eal" id="avC-cU-pMf"/>
                     </connections>
                 </viewController>

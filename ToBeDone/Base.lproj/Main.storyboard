@@ -193,6 +193,6 @@
     </scenes>
     <resources>
         <image name="back_menu" width="24" height="24"/>
-        <image name="hamburger_menu" width="32" height="32"/>
+        <image name="hamburger_menu" width="24" height="24"/>
     </resources>
 </document>

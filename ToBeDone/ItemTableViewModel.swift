@@ -91,19 +91,19 @@ class ItemTableViewModel {
             
             let date =  DateUtilities.dateFrom(dateString: itemModel.scheduledDate!)!
             
-            if date.isInPast() {
+            if date.compare(.isEarlier(than: Date())) {
                 schedulePast.itemCells.append(itemModel)
                 continue
-            } else if date.isThisWeek() {
+            } else if date.compare(.isThisWeek) {
                 scheduledThisWeek.itemCells.append(itemModel)
                 continue
-            } else if date.isNextWeek() {
+            } else if date.compare(.isNextWeek) {
                 scheduledNextWeek.itemCells.append(itemModel)
                 continue
-            } else if date.isSameMonthAsDate(Date()) {
+            } else if date.compare(.isSameMonth(as:Date())) {
                 scheduledThisMonth.itemCells.append(itemModel)
                 continue
-            } else if date.isThisYear() {
+            } else if date.compare(.isThisYear) {
                 scheduledThisYear.itemCells.append(itemModel)
                 continue
             }

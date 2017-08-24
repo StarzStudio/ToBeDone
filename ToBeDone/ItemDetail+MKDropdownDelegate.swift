@@ -115,7 +115,7 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
                 // state change
                 
                 let date = userSelectedDate
-                if date.isToday()  == true {
+                if date.compare(.isToday)  == true {
                     weakSelf!.viewModel.item.state = "Today"
                 } else {
                     weakSelf!.viewModel.item.state = "Scheduled"

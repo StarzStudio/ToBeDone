@@ -23,8 +23,8 @@ extension MainViewController : FlowingMenuDelegate {
     
     func flowingMenuNeedsDismissMenu(_ flowingMenu: FlowingMenuTransitionManager) {
         menu?.performSegue(withIdentifier: DismissSegueName, sender: self)
-        self.showItemTableForIndex(self.selectedIndex)
-        print ("flowingMenuNeedsDismissMenu: selected Index: \(selectedIndex)")
+        //self.showItemTableForIndex(self.selectedIndex)
+        //print ("flowingMenuNeedsDismissMenu: selected Index: \(selectedIndex)")
     }
     
 }

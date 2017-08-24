@@ -81,7 +81,12 @@ class ItemTableViewController: UITableViewController {
     }
 
     func leftNaviBarItemActionForItemDetail() {
-
+        if let itemDetailVC = self.navigationController?.viewControllers.last as? ItemDetailViewController {
+            if let dropdownmenu = itemDetailVC.dropDownMenu {
+                dropdownmenu.closeAllComponents(animated: true);
+            }
+        }
+       
         self.navigationController?.popViewController(animated: true)
     }
 
