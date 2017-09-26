@@ -47,7 +47,7 @@ class TodoItem : Object {
     //  var imageFiles = List<ImageFile>()
     
     dynamic var id  = ""
-    dynamic var createdDate :String = {
+    dynamic var createdDate : String = {
         return DateUtilities.stringFromCurrentDate()
     }()
     

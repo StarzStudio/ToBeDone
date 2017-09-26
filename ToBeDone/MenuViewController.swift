@@ -46,7 +46,7 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     
     let DismissSegueName = "DismissMenuSegue"
 
-    var menuItemIndex:Int = 0
+    var menuItemIndex : Int?
     
     var viewModel = MenuViewModel.sharedInstance
     
@@ -133,8 +133,10 @@ class MenuViewController: UIViewController,  UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         let mainViewController = segue.destination as! MainViewController
-
-        mainViewController.showItemTableForIndex(menuItemIndex)
+        if let index = menuItemIndex {
+              mainViewController.showItemTableForIndex(index)
+        }
+      
 
 
     }

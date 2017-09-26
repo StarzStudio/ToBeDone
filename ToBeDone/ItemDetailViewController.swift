@@ -6,17 +6,18 @@
 //  Copyright © 2016 周星. All rights reserved.
 //
 
+// Todo: add local or remote notification when setting alert date
+
 import Foundation
 import UIKit
 import CoreLocation
-import SnapKit
+
 import AFDateHelper
 import IGListKit
 import MKDropdownMenu
 import ChameleonFramework
-import ExpandingMenu
+
 import RKTagsView
-import FlatUIKit
 
 
 class ItemDetailViewController : UIViewController{
@@ -24,7 +25,7 @@ class ItemDetailViewController : UIViewController{
     @IBOutlet weak var tagList_TagsView : RKTagsView!
     @IBOutlet weak var itemNote_TextView : FloatLabelTextView!
    // @IBOutlet weak var images_CollectionView: UICollectionView!
-    @IBOutlet weak var location_Button : imgLeftTitleRightButton!
+   // @IBOutlet weak var location_Button : imgLeftTitleRightButton!
     @IBOutlet weak var subTasks_Table: UITableView!
     @IBOutlet weak var confirm_Button : UIButton!
     @IBOutlet weak var itemTitle_TextField: FloatLabelTextField!
@@ -53,7 +54,7 @@ class ItemDetailViewController : UIViewController{
     var datePicker = DatePickerDialog()
     var alertView = AlertView()
    
-    var mapView = MapViewController()
+    //var mapView = MapViewController()
     
     
     var dropDownMenu : MKDropdownMenu!
@@ -82,14 +83,14 @@ class ItemDetailViewController : UIViewController{
         setTagList()
         setItemTitle()
         setItemNote()
-        setLocationButton()
-        self.location_Button.isHidden = true
+        //setLocationButton()
+        //self.location_Button.isHidden = true
         setDropDownMenu()
       
         setHidedItems()
         setConfirmBotton()
         
-        notificationCenterSetup()
+        //notificationCenterSetup()
         
         switch viewModel.currentState {
         case .Modifing:
@@ -117,9 +118,14 @@ class ItemDetailViewController : UIViewController{
         
         
         // set notification if alert date has been set
-        if let alertDate = self.alertDate {
-            NotificationService.addLocalNotification(with: viewModel.item.alertDate!, on: alertDate)
-        }
+       // if let alertDate = self.alertDate {
+            //NotificationService.addLocalNotification(with: viewModel.item.alertDate!, on: alertDate)
+       // }
+        
+        // call end text editing for text field and text view
+        textViewDidEndEditing(self.itemNote_TextView)
+        textFieldDidEndEditing(self.itemTitle_TextField)
+        
         
         // store tags:
         viewModel.item.tags = self.tagList_TagsView.tags;
@@ -138,28 +144,29 @@ class ItemDetailViewController : UIViewController{
     
     
 
-    fileprivate func notificationCenterSetup() {
-        let pinSwitchOn = NSNotification.Name(rawValue:"pinSwitchOn")
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(unHideLocatonButton), name: pinSwitchOn, object: nil)
-        
-        let pinSwitchOff = NSNotification.Name(rawValue:"pinSwitchOff")
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(hiderLocatonButton), name: pinSwitchOff, object: nil)
-        
-        
-    }
+//    fileprivate func notificationCenterSetup() {
+//        let pinSwitchOn = NSNotification.Name(rawValue:"pinSwitchOn")
+//        
+//        NotificationCenter.default.addObserver(self, selector:#selector(unHideLocatonButton), name: pinSwitchOn, object: nil)
+//        
+//        let pinSwitchOff = NSNotification.Name(rawValue:"pinSwitchOff")
+//        
+//        NotificationCenter.default.addObserver(self, selector:#selector(hiderLocatonButton), name: pinSwitchOff, object: nil)
+//        
+//        
+//    }
     
-    func unHideLocatonButton(notification:NSNotification) {
-        self.location_Button.isHidden = false
-    }
-    
-    func hiderLocatonButton(notification:NSNotification) {
-        self.location_Button.isHidden = true
-    }
+//    func unHideLocatonButton(notification:NSNotification) {
+//        self.location_Button.isHidden = false
+//    }
+//    
+//    func hiderLocatonButton(notification:NSNotification) {
+//        self.location_Button.isHidden = true
+//    }
     
     override func viewDidDisappear(_ animated: Bool) {
         Debug.log(message: "detail view disappear")
+
     }
     
     
@@ -178,47 +185,47 @@ class ItemDetailViewController : UIViewController{
     // MARK: - Setting
             // MARK: location
     
-    func setLocationButton () {
-        
-        var placeName = self.viewModel.defaultPlaceContent
-        let locationButtonImg = UIImage(named: "Location_ItemDetail")
-        self.location_Button.setTitle(newTitle: placeName)
-        self.location_Button.setImg(newImg: locationButtonImg)
-        self.location_Button.addTarget(self, action: #selector(self.tapLocationButton) , for: .touchUpInside)
-        
-        weak var weakSelf = self
-        
-        self.viewModel.getLocationCentent() { (placeName) -> Void in
-            // if user switch back to the table view before the location update, then self will be nil.
-            if let validWeakSelf = weakSelf {
-                validWeakSelf.location_Button.setTitle(newTitle: placeName)
-            }
-
-        }
-        
-        
-    }
-    
-    func tapLocationButton () {
-        // show popover view
-        //        let aView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
-        //        let options = [
-        //            .type(.up),
-        //            .animationIn(0.3)
-        //            ] as [PopoverOption]
-        //        let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
-        //
-        //        popover.show(aView, fromView: self.locationButton)
-        
-        weak var weakSelf = self
-        self.viewModel.getCurrentCLLocation() { (cllocation) -> Void in
-            weakSelf!.mapView.location = cllocation
-            if let navi = self.navigationController {
-                navi.pushViewController(weakSelf!.mapView, animated: true)
-                
-            }
-        }
-    }
+//    func setLocationButton () {
+//        
+//        var placeName = self.viewModel.defaultPlaceContent
+//        let locationButtonImg = UIImage(named: "Location_ItemDetail")
+//        self.location_Button.setTitle(newTitle: placeName)
+//        self.location_Button.setImg(newImg: locationButtonImg)
+//        self.location_Button.addTarget(self, action: #selector(self.tapLocationButton) , for: .touchUpInside)
+//        
+//        weak var weakSelf = self
+//        
+//        self.viewModel.getLocationCentent() { (placeName) -> Void in
+//            // if user switch back to the table view before the location update, then self will be nil.
+//            if let validWeakSelf = weakSelf {
+//                validWeakSelf.location_Button.setTitle(newTitle: placeName)
+//            }
+//
+//        }
+//        
+//        
+//    }
+//    
+//    func tapLocationButton () {
+//        // show popover view
+//        //        let aView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+//        //        let options = [
+//        //            .type(.up),
+//        //            .animationIn(0.3)
+//        //            ] as [PopoverOption]
+//        //        let popover = Popover(options: options, showHandler: nil, dismissHandler: nil)
+//        //
+//        //        popover.show(aView, fromView: self.locationButton)
+//        
+//        weak var weakSelf = self
+//        self.viewModel.getCurrentCLLocation() { (cllocation) -> Void in
+//            weakSelf!.mapView.location = cllocation
+//            if let navi = self.navigationController {
+//                navi.pushViewController(weakSelf!.mapView, animated: true)
+//                
+//            }
+//        }
+//    }
 
     
      // MARK: tag
@@ -264,6 +271,7 @@ class ItemDetailViewController : UIViewController{
         self.itemTitle_TextField.autocorrectionType = UITextAutocorrectionType.yes
         self.itemTitle_TextField.autocapitalizationType = UITextAutocapitalizationType.sentences
         self.itemTitle_TextField.keyboardAppearance = UIKeyboardAppearance.dark
+        self.itemTitle_TextField.autocapitalizationType = .words
         self.itemTitle_TextField.delegate = self
         self.view.addSubview(self.self.itemTitle_TextField)
     }
@@ -278,13 +286,13 @@ class ItemDetailViewController : UIViewController{
         self.itemNote_TextView.titleActiveTextColour = UIColor.darkGray
         self.itemNote_TextView.backgroundColor = UIColor.clear
         self.itemNote_TextView.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
-        self.itemNote_TextView.returnKeyType = UIReturnKeyType.done
+        //self.itemNote_TextView.returnKeyType = UIReturnKeyType.search
         self.itemNote_TextView.autocorrectionType = UITextAutocorrectionType.yes
         self.itemNote_TextView.autocapitalizationType = UITextAutocapitalizationType.sentences
         self.itemNote_TextView.keyboardAppearance = UIKeyboardAppearance.dark
         self.itemNote_TextView.delegate = self
         self.itemNote_TextView.layer.cornerRadius  = 4.0
-
+        self.itemNote_TextView.autocapitalizationType = .sentences
         self.view.addSubview(self.itemNote_TextView)
         
     }
@@ -301,12 +309,14 @@ class ItemDetailViewController : UIViewController{
        
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if self.itemTitle_TextField.isFirstResponder  == true {
-            self.itemTitle_TextField.resignFirstResponder()
-        }
-        if self.itemNote_TextView.isFirstResponder == true {
-            self.itemNote_TextView.resignFirstResponder()
-        }
+        
+        self.view.endEditing(true)
+//        if self.itemTitle_TextField.isFirstResponder  == true {
+//            self.itemTitle_TextField.resignFirstResponder()
+//        }
+//        if self.itemNote_TextView.isFirstResponder == true {
+//            self.itemNote_TextView.resignFirstResponder()
+//        }
     }
     
     
@@ -319,14 +329,14 @@ class ItemDetailViewController : UIViewController{
         if let scheduleDate = itemDTO.scheduledDate {
             self.dueDate_Label.isHidden = false
             self.dueDate_ImageView.isHidden = false
-            dueDate_Label.text = scheduleDate
+            self.dueDate_Label.text = scheduleDate
 
         }
         
         if let alertDate = itemDTO.alertDate {
             self.alertTime_Label.isHidden = false
-            self.alertTime_Label.isHidden = false
-            dueDate_Label.text = alertDate
+            self.alertTime_ImageView.isHidden = false
+            self.alertTime_Label.text = alertDate
             
         }
         for tag in viewModel.item.tags {

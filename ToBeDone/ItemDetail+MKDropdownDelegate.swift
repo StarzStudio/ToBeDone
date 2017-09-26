@@ -98,6 +98,9 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
             
             if let userSelectedDate = date {
                 
+                weakSelf!.resetAlertTime()
+                
+                
                 let pickedDate  = DateUtilities.stringFrom(date: userSelectedDate)
                 // dateTimeButton in the menu shall still appear as "Due date"
                 //weakSelf!.dateTimeButton.setTitle(pickedDate, for: .normal)
@@ -112,7 +115,7 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
                 // state change
                 
                 let date = userSelectedDate
-                if date.isToday()  == true {
+                if date.compare(.isToday)  == true {
                     weakSelf!.viewModel.item.state = "Today"
                 } else {
                     weakSelf!.viewModel.item.state = "Scheduled"
@@ -146,28 +149,40 @@ extension ItemDetailViewController: MKDropdownMenuDelegate {
             return
             
         }
-        self.alertView.show("Alert Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel") { _ in
+        self.alertView.show("Alert Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel") { (tag) -> Void in
             
-            let selectedAlertOption = weakSelf!.alertView.alertChoiceTable.selectedAlertOption
-            //weakSelf!.alertButton.setTitle(selectedAlertOption, for: .normal)
-            weakSelf!.alertTime_Label.text = selectedAlertOption
-            weakSelf!.alertTime_Label.isHidden = false
-            weakSelf!.alertTime_ImageView.isHidden = false
-            let calculatedDateString = weakSelf!.calculateAlertDate(alertOption: selectedAlertOption)
-            // db item
-            if let calculatedDateString = calculatedDateString {
-                Debug.log(message: "the alert date is:\(calculatedDateString)" )
-                self.alertDate = DateUtilities.dateFrom(dateString: calculatedDateString)!
-                
-                
-                
-                weakSelf!.viewModel.item.alertDate = calculatedDateString
-                
-                
+            // tag == 0 means user taps "Done" button, 1 means user tap “Cancel" button
+            if tag == 0 {
+                let selectedAlertOption = weakSelf!.alertView.alertChoiceTable.selectedAlertOption
+                //weakSelf!.alertButton.setTitle(selectedAlertOption, for: .normal)
+                weakSelf!.alertTime_Label.text = selectedAlertOption
+                weakSelf!.alertTime_Label.isHidden = false
+                weakSelf!.alertTime_ImageView.isHidden = false
+                let calculatedDateString = weakSelf!.calculateAlertDate(alertOption: selectedAlertOption)
+                // db item
+                if let calculatedDateString = calculatedDateString {
+                    Debug.log(message: "the alert date is:\(calculatedDateString)" )
+                    self.alertDate = DateUtilities.dateFrom(dateString: calculatedDateString)!
+                    
+                    
+                    
+                    weakSelf!.viewModel.item.alertDate = calculatedDateString
+                    
+                    
+                }
             }
             
             weakSelf!.dropDownMenu.closeAllComponents(animated: true)
         }
+    }
+    
+    func resetAlertTime() {
+        
+        self.alertTime_Label.text = nil
+        self.alertTime_Label.isHidden = true
+        self.alertTime_ImageView.isHidden = true
+        self.viewModel.item.alertDate = nil
+        
     }
     
     func calculateAlertDate (alertOption : String?)  -> String?{

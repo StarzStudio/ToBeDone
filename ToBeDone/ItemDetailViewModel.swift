@@ -48,7 +48,7 @@ class ItemDetailViewModel : Observer {
         }
     }
     private var todoItemStore = TodoItemStore.sharedInstance
-    private let locationService = LocationService.sharedInstance
+   // private let locationService = LocationService.sharedInstance
     
     var item : TodoItemDTO {
         get {
@@ -124,27 +124,27 @@ class ItemDetailViewModel : Observer {
     
     // MARK: - location service
     
-    func getLocationCentent (completionHandler : @escaping (String) -> Void ) {
-        
-        locationService.getCurrentPlaceName(placeNameDisplayMode: .concise) { (generatedPlaceName) -> Void in
-        
-            self.itemDTO!.location = generatedPlaceName
-            if let unwrapped_generatedPlaceName = generatedPlaceName {
-                completionHandler(unwrapped_generatedPlaceName)
-            }
-    
-        }
-    }
-    
-    func getCurrentCLLocation (completionHandler : @escaping (CLLocation) -> Void ) {
-        
-        locationService.getCurrentCLLocation() { (cllocation) -> Void in
-            if let unwrapped_cllocation = cllocation {
-                completionHandler(unwrapped_cllocation)
-            }
-        }
-
-    }
+//    func getLocationCentent (completionHandler : @escaping (String) -> Void ) {
+//        
+//        locationService.getCurrentPlaceName(placeNameDisplayMode: .concise) { (generatedPlaceName) -> Void in
+//        
+//            self.itemDTO!.location = generatedPlaceName
+//            if let unwrapped_generatedPlaceName = generatedPlaceName {
+//                completionHandler(unwrapped_generatedPlaceName)
+//            }
+//    
+//        }
+//    }
+//    
+//    func getCurrentCLLocation (completionHandler : @escaping (CLLocation) -> Void ) {
+//        
+//        locationService.getCurrentCLLocation() { (cllocation) -> Void in
+//            if let unwrapped_cllocation = cllocation {
+//                completionHandler(unwrapped_cllocation)
+//            }
+//        }
+//
+//    }
     let updateTableViewNotifiName = NSNotification.Name(rawValue:"updateTableView")
     
     func updateTableViewAction() {

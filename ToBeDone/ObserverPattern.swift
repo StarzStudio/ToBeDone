@@ -38,7 +38,7 @@ extension ItemDetailViewController : Subject {
         let result = viewModel.detectErrorsBeforePersistence()
         switch result {
         case .Success :
-            Debug.log(message: "successfully log the data")
+            Debug.log(message: "successfully store the data")
             viewModel.update()
             return true
         case .Failure(.FailNoTitleProvided) :

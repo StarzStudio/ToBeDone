@@ -12,9 +12,9 @@ extension ItemDetailViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        self.itemTitle_TextField.resignFirstResponder()
+        self.itemNote_TextView.resignFirstResponder()
         
-        self.viewModel.item.title = textView.text
+        self.viewModel.item.note = textView.text
         
     }
     

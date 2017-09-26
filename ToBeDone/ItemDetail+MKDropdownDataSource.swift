@@ -27,12 +27,12 @@ extension ItemDetailViewController: MKDropdownMenuDataSource {
     
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, attributedTitleForComponent component: Int) -> NSAttributedString? {
         
-        return NSAttributedString.init(string: "Tools",
+        return NSAttributedString.init(string: "Timer",
                                        attributes:  [NSFontAttributeName: UIFont.init(name: "Chalkboard SE", size: 17)!, NSForegroundColorAttributeName: UIColor.flatBlack])
     }
     
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, attributedTitleForSelectedComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString.init(string: "Tools",
+        return NSAttributedString.init(string: "Timer",
                                        attributes:  [NSFontAttributeName: UIFont.init(name: "Chalkboard SE", size: 17)!, NSForegroundColorAttributeName: UIColor.flatBlack])
         
     }

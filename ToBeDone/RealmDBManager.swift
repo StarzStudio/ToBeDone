@@ -19,7 +19,7 @@ class RealmDBManager {
     public func createDB() -> Realm {
         
         if ((db) == nil) {
-            deleteDBFile()
+            //deleteDBFile()   // uncomment if a new db file is wanted every time application loads
             db = try! Realm() // Create realm pointing to default file
         }
         return db!
@@ -36,4 +36,5 @@ class RealmDBManager {
         print(" Real db file path is: \(Realm.Configuration.defaultConfiguration.fileURL!) ")
         
     }
+   
 }

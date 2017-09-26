@@ -9,9 +9,7 @@
 import UIKit
 import FlowingMenu
 import RealmSwift
-import Firebase
-import FirebaseAuth
-import FirebaseDatabase
+
 
 
 enum DestinationVCType : Int {
@@ -44,7 +42,7 @@ class MainViewController: UIViewController  {
     var selectedIndex = 2
     var selectedTable:UITableViewController?
     var menu: UIViewController?
-    
+    var firstTime = true;
     
    // var ref: FIRDatabaseReference!
     // fileprivate var _refHandle: FIRDatabaseHandle!
@@ -58,77 +56,21 @@ class MainViewController: UIViewController  {
         flowingMenuTransitionManager.setInteractivePresentationView(view)
         flowingMenuTransitionManager.delegate = self
         
-        showItemTableForIndex(0);
-        
-        //add whole local database to firebase
-        //FirebaseService.syncData()
         
         
-       // configureDatabase()
+          
         
         
     }
     
-//    deinit {
-//        if let user = FIRAuth.auth()?.currentUser{
-//            self.ref.child("/Users/\(user.uid)/database").removeObserver(withHandle: _refHandle)
-//        }
-//    }
-
-    
-//    func configureDatabase() {
-//        ref = FIRDatabase.database().reference()
-//        if let user = FIRAuth.auth()?.currentUser{
-//            // Listen for new messages in the Firebase database
-//            _refHandle = self.ref.child("/Users/\(user.uid)/database").observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-//                guard let strongSelf = self else { return }
-//                
-//                
-//                    let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
-//                    let item = FirebaseService.parseData(from: itemDictionary)
-//                    strongSelf.todoItemStore.update(item: item)
-//                    print("New item: \(item.title)")
-//                    if  strongSelf.selectedTable is ToDoItemsViewController2 {
-//                        
-//                        let table = strongSelf.selectedTable as! ToDoItemsViewController2
-//                        print("\(item.state)")
-//                        print("\(table.collectionType!)")
-//                        if item.state == table.collectionType!{
-//                            print("wutttt")
-//                            //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
-//                            
-//                            table.prepareData()
-//                            table.tableView.reloadData()
-//                    }
-//                }
-//            })
-//            self.ref.child("/Users/\(user.uid)/database").observe(.childRemoved, with: { [weak self] (snapshot) -> Void in
-//                guard let strongSelf = self else { return }
-//                let itemDictionary = snapshot.value as? NSDictionary as! [String : Any]
-//                let item = FirebaseService.parseData(from: itemDictionary)
-//                strongSelf.todoItemStore.deleteItem(withID: item.id)
-//                print("item removed: \(item.title!)")
-//                if  strongSelf.selectedTable is ToDoItemsViewController2 {
-//                    print("sdasd)")
-//                    let table = strongSelf.selectedTable as! ToDoItemsViewController2
-//                    print("\(item.state)")
-//                    print("\(table.collectionType!)")
-//                    if item.state == table.collectionType!{
-//                        //table.items = strongSelf.todoItemStore.query(stateName: "'\(table.collectionType!)'", property: "scheduledDate")
-//                        print("sdasdasdasd)")
-//                        table.prepareData()
-//                        table.tableView.reloadData()
-//                    }
-//                }
-//            })
-//        }
-//        //self.showDemoControllerForIndex(selectedIndex)
-//    }
-//    
     
     
     override func viewDidAppear(_ animated: Bool) {
         
+        if firstTime == true {
+            showItemTableForIndex(0);
+            firstTime = false;
+        }
         print("main view appear")
         print ("view appear: selected Index: \(selectedIndex)")
         
@@ -184,8 +126,7 @@ class MainViewController: UIViewController  {
             
         case .SettingVC:
             initSettingView()
-        default:
-            break;
+    
         }
         
         
@@ -254,10 +195,11 @@ class MainViewController: UIViewController  {
         titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = NSTextAlignment.center
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.99, green: 0.73, blue: 0.17, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.black
+     //   self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationItem.titleView = titleLabel
         //let rightItem1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(self.rightNaviBarItemActionForItemTable1))
         let rightItem2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemTable2))
+        rightItem2.tintColor = UIColor.black
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.rightBarButtonItems = [rightItem2]
         
@@ -294,12 +236,18 @@ class MainViewController: UIViewController  {
         
         //  let rightItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemDetail))
         let leftItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(self.leftNaviBarItemActionForItemDetail))
+        
+        leftItem.tintColor = UIColor.black
         detailView.navigationItem.rightBarButtonItem = nil
         detailView.navigationItem.leftBarButtonItem = leftItem
     }
     
     func leftNaviBarItemActionForItemDetail() {
-        
+        if let itemDetailVC = self.navigationController?.viewControllers.last as? ItemDetailViewController {
+            if let dropdownmenu = itemDetailVC.dropDownMenu {
+                dropdownmenu.closeAllComponents(animated: true);
+            }
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }

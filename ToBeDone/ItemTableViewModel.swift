@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import AFDateHelper
 enum ActionOnCellType {
     case Log
     case Delete
@@ -17,6 +17,8 @@ enum ActionOnCellType {
 }
 
 class ItemTableViewModel {
+    
+    
     
     static var sharedInstance = ItemTableViewModel()
     private let itemStore = TodoItemStore.sharedInstance
@@ -33,12 +35,24 @@ class ItemTableViewModel {
     
     var itemCellModelsCollection = [ItemCellModel]()
     
+    var scheduledSections = [ScheduledItemSectionModel]() 
     
     
     private func getItemCellsStateContentFromCollection() {
+        
+        if currentTableContentType == "Scheduled" {
+            getItemCellsStateContent_schduled()
+        } else {
+            getItemCellsStateContent_normal()
+        }
+        
+    }
+    
+    
+    private func  getItemCellsStateContent_normal() {
         //clear all old data
         itemCellModelsCollection.removeAll()
-        
+    
         for (index, item) in itemsCollection.enumerated() {
             let itemModel = ItemCellModel()
             itemModel.cellIndex = index
@@ -52,8 +66,77 @@ class ItemTableViewModel {
             itemModel.images = Array( item.images.values)
             itemCellModelsCollection.append(itemModel)
         }
+
     }
-    
+    private func  getItemCellsStateContent_schduled() {
+        
+        scheduledSections.removeAll()
+        
+        let schedulePast = ScheduledItemSectionModel()
+        let scheduledThisWeek = ScheduledItemSectionModel()
+        let scheduledNextWeek = ScheduledItemSectionModel()
+        let scheduledThisMonth = ScheduledItemSectionModel()
+        let scheduledThisYear = ScheduledItemSectionModel()
+        for (index, item) in itemsCollection.enumerated() {
+            let itemModel = ItemCellModel()
+            itemModel.cellIndex = index
+            itemModel.title = item.title
+            itemModel.note = item.note
+            itemModel.state = item.state
+            itemModel.tags = item.tags
+            itemModel.createdDate = item.createdDate
+            itemModel.scheduledDate = item.scheduledDate
+            itemModel.alertDate = item.alertDate
+            itemModel.images = Array( item.images.values)
+            
+            let date =  DateUtilities.dateFrom(dateString: itemModel.scheduledDate!)!
+            
+            if date.compare(.isEarlier(than: Date())) {
+                schedulePast.itemCells.append(itemModel)
+                continue
+            } else if date.compare(.isThisWeek) {
+                scheduledThisWeek.itemCells.append(itemModel)
+                continue
+            } else if date.compare(.isNextWeek) {
+                scheduledNextWeek.itemCells.append(itemModel)
+                continue
+            } else if date.compare(.isSameMonth(as:Date())) {
+                scheduledThisMonth.itemCells.append(itemModel)
+                continue
+            } else if date.compare(.isThisYear) {
+                scheduledThisYear.itemCells.append(itemModel)
+                continue
+            }
+        }
+        
+         schedulePast.title = "In the past"
+         scheduledThisWeek.title = "This week"
+         scheduledNextWeek.title = "Next week"
+         scheduledThisMonth.title = "This month"
+         scheduledThisYear.title = "This year"
+        if schedulePast.itemCells.count > 0  {
+            scheduledSections.append(schedulePast)
+
+        }
+        if scheduledThisWeek.itemCells.count > 0  {
+            scheduledSections.append(scheduledThisWeek)
+            
+        }
+        if scheduledNextWeek.itemCells.count > 0  {
+            scheduledSections.append(scheduledNextWeek)
+            
+        }
+        if scheduledThisMonth.itemCells.count > 0  {
+            scheduledSections.append(scheduledThisMonth)
+            
+        }
+        if scheduledThisYear.itemCells.count > 0  {
+            scheduledSections.append(scheduledThisYear)
+            
+        }
+    }
+
+   
     
     
     // triggered when user click the action button in table view

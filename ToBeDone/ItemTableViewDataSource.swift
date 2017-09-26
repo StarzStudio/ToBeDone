@@ -11,7 +11,13 @@ import Foundation
 extension ItemTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {//number of section
-        return 1
+        if viewModel.currentTableContentType == "Scheduled" {
+            return self.viewModel.scheduledSections.count
+        }
+        else {
+            return 1
+
+        }
     }
 
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -20,12 +26,25 @@ extension ItemTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //number of item in each section
-        return viewModel.itemCellModelsCollection.count
+        
+        if viewModel.currentTableContentType == "Scheduled" {
+            return self.viewModel.scheduledSections[section].itemCells.count
+        }
+        else {
+            return viewModel.itemCellModelsCollection.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {//load data into each row
 
-        let itemCellModel = self.viewModel.itemCellModelsCollection[indexPath.row]
+        var itemCellModel : ItemCellModel!
+        if viewModel.currentTableContentType == "Scheduled" {
+            itemCellModel = self.viewModel.scheduledSections[indexPath.section].itemCells[indexPath.row]
+        }
+        else {
+            itemCellModel = self.viewModel.itemCellModelsCollection[indexPath.row]
+        }
+        
         
         switch itemCellModel.cellType {
         case .ArchivedCell:
@@ -48,9 +67,19 @@ extension ItemTableViewController {
 
     }
 
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//
-//    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+        if viewModel.currentTableContentType == "Scheduled" {
+            return self.viewModel.scheduledSections[section].title!
+        }
+        else {
+            return ""
+        }
+
+    }
+    
+   
+    
+
 
 }

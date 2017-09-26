@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,23 +18,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      let store = TodoItemStore.sharedInstance;
     
     
+     let item1 = TodoItemDTO()
+     let item2 = TodoItemDTO()
+     let item3 = TodoItemDTO()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-       //  NotificationService.enableLocalNotifications(application: application)//enable notification
+      //  NotificationService.enableLocalNotifications(application: application)//enable notification
         
-       // FIRApp.configure()//configure Firebase
+       
         
         // fill realm db for test purpose
 
-        fillDBWithTestData()
+        //fillDBWithTestData()
 
-        
-     //   FirebaseService.syncData()
-    
+        dbManager.printDBFilePath()
+     
+        fillDBWithProductionTestData()
         return true
     }
     
+    
+    func fillDBWithProductionTestData() {
+        // inbox
+       
+        item1.title = "Test data in 'inbox'"
+        item1.state = "Inbox"
+        item1.tags = ["errands", "life"]
+        item1.note = "item that doesn't have any scheduled time will be in 'inbox'. You can click trash button to just delete it or log button to move this item to the 'Archived' section. Click this item cell to see the detail of this item."
+        
+        // scheduled
+        
+        item2.title = "Test data in seheduled"
+        item2.state = "Scheduled"
+        item2.note = "item that have scheduled time except today will be here"
+        item2.scheduledDate = DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 1)
+        
+        // today
+        
+        item3.title = "Test data in today"
+        item3.state = "Today"
+        item3.note  = "item that have scheduled time as today will be here"
+        
+        item3.scheduledDate =  DateUtilities.stringFromScheduledDate(numOfDatesSinceToday: 0)
+
+         store.add(item: item1)
+         store.add(item: item2)
+         store.add(item: item3)
+        
+    }
     func fillDBWithTestData() {
         // inbox
         let item1 = TodoItemDTO()
@@ -198,6 +231,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
+        store.delete(item: item1)
+        store.delete(item: item2)
+        store.delete(item: item3)
     }
 
 

@@ -48,6 +48,11 @@ class ItemTableViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
         
         tableView.backgroundColor = UIColor(red:0.91, green:0.91, blue:0.91, alpha:1.0)
+        
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 1))
+        
+        
     }
 
 
@@ -70,12 +75,18 @@ class ItemTableViewController: UITableViewController {
 
         //  let rightItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(self.rightNaviBarItemActionForItemDetail))
         let leftItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(self.leftNaviBarItemActionForItemDetail))
+        leftItem.tintColor = UIColor.black
         detailView.navigationItem.rightBarButtonItem = nil
         detailView.navigationItem.leftBarButtonItem = leftItem
     }
 
     func leftNaviBarItemActionForItemDetail() {
-
+        if let itemDetailVC = self.navigationController?.viewControllers.last as? ItemDetailViewController {
+            if let dropdownmenu = itemDetailVC.dropDownMenu {
+                dropdownmenu.closeAllComponents(animated: true);
+            }
+        }
+       
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -88,8 +99,9 @@ class ItemTableViewController: UITableViewController {
     }
     
     func reloadTable() {
-        tableView.reloadData()
         self.viewModel.updateData()
+        tableView.reloadData()
+        
     }
 }
     

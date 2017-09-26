@@ -19,7 +19,7 @@
 
 import UIKit
 import IGListKit
-import  RKTagsView
+import RKTagsView
 
 
 class CollectionCellViewController: UIViewController ,IGListAdapterDataSource {
