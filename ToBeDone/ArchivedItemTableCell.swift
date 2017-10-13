@@ -66,8 +66,6 @@ class ArchivedItemTableCell: UITableViewCell {
     
     func tapRestoreButton() {
         viewModel.actionOnSingleCell(itemCellIndex: cellModel!.cellIndex!, actionType: .Restore)
-        
-        
         viewModel.updateTableViewAction()
 
     }

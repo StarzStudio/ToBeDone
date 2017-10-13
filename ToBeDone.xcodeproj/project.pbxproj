@@ -187,13 +187,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B092E811DF3B63500CF7291 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Shared;
-			sourceTree = "<group>";
-		};
 		7F572DFAC9D984DEF669462E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,7 +282,8 @@
 		D92DC8101DC544B200744BCC /* ToBeDone */ = {
 			isa = PBXGroup;
 			children = (
-				3B092E811DF3B63500CF7291 /* Shared */,
+				D983EFD11EA94C94001C830B /* DTO */,
+				D983EFC31EA843AF001C830B /* DAL */,
 				D9CEBC681DC54A7A00003C44 /* Model */,
 				D9CEBC831DC54C1A00003C44 /* Service */,
 				D9CEBC671DC54A6D00003C44 /* Utility */,
@@ -533,8 +527,8 @@
 		D9CEBC671DC54A6D00003C44 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				D9CEBC5C1DC54A5800003C44 /* DebugUtilities.swift */,
 				D983EFEB1EAAE099001C830B /* Unused */,
+				D9CEBC5C1DC54A5800003C44 /* DebugUtilities.swift */,
 				D983EFB91EA83E8B001C830B /* AlertMessage.swift */,
 				D983EFBD1EA842BD001C830B /* DateUtilities.swift */,
 			);
@@ -544,8 +538,6 @@
 		D9CEBC681DC54A7A00003C44 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D983EFD11EA94C94001C830B /* DTO */,
-				D983EFC31EA843AF001C830B /* DAL */,
 				D9CEBC591DC54A5800003C44 /* TodoItem+Realm.swift */,
 			);
 			name = Model;
@@ -984,7 +976,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1029,7 +1021,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ToBeDone-Bridge-Header";

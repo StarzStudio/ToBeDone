@@ -167,7 +167,7 @@ class ItemTableViewModel {
         case .DisSelect:
             self.itemCellModelsCollection[itemCellIndex].isChecked = false
         case .Restore:
-            updateItemState(item: item, newState: "Inbox")
+            updateItemState(item: item, newState: nil)
             AlertMessage.successStatusline(body:  "Restored the stick successfully!")
 
 
@@ -199,8 +199,23 @@ class ItemTableViewModel {
     }
     
     
-    fileprivate func updateItemState (item : TodoItemDTO, newState : String) {
-        item.state =  newState
+    fileprivate func updateItemState (item : TodoItemDTO, newState : String?) {
+        if let __newstate = newState {
+            item.state =  __newstate
+        } else {
+            if let __itemDate = item.scheduledDate {
+                let itemDate = DateUtilities.dateFrom(dateString: __itemDate)!
+                if itemDate.compare(.isToday) {
+                    item.state = "Today"
+                }
+                else {
+                    item.state = "Scheduled"
+                }
+            } else {
+                item.state = "Inbox"
+            }
+            
+        }
         itemStore.update(item: item)
        
     }

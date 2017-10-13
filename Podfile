@@ -11,14 +11,10 @@ target 'ToBeDone' do
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     #pod 'Popover'
     #pod 'AZExpandableIconListView'
-    
     pod 'FoldingCell’, '~> 2.0.1'
     #pod 'M13Checkbox'
     pod 'AFDateHelper', '~> 4.2.2'
-    #pod 'SnapKit', '~> 3.0'
-    
     pod 'SwiftMessages'
-    #pod 'Material', '~> 2.0'
     pod 'IGListKit', '~> 1.0.0'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
     pod 'FlowingMenu', '~> 2.0.1'
@@ -26,7 +22,6 @@ target 'ToBeDone' do
     pod 'FlatUIKit'
     pod 'MKDropdownMenu'
     pod 'DZNEmptyDataSet'
-
 
     #pod 'Material', '~> 2.0'
     #pod 'ExpandingMenu', '~> 0.3'

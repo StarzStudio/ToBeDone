@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-
+ 
 class RealmDBManager {
     
      static let sharedInstance = RealmDBManager()
@@ -19,7 +19,7 @@ class RealmDBManager {
     public func createDB() -> Realm {
         
         if ((db) == nil) {
-            //deleteDBFile()   // uncomment if a new db file is wanted every time application loads
+            //deleteDBFile()   // uncomment if a new    db file is wanted every time application loads
             db = try! Realm() // Create realm pointing to default file
         }
         return db!

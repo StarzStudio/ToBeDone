@@ -78,6 +78,7 @@ class ItemTableViewController: UITableViewController {
         leftItem.tintColor = UIColor.black
         detailView.navigationItem.rightBarButtonItem = nil
         detailView.navigationItem.leftBarButtonItem = leftItem
+        
     }
 
     func leftNaviBarItemActionForItemDetail() {

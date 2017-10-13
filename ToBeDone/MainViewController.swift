@@ -202,7 +202,7 @@ class MainViewController: UIViewController  {
         rightItem2.tintColor = UIColor.black
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.rightBarButtonItems = [rightItem2]
-        
+        self.navigationItem.leftBarButtonItem?.title = nil
     }
     
     
@@ -240,6 +240,7 @@ class MainViewController: UIViewController  {
         leftItem.tintColor = UIColor.black
         detailView.navigationItem.rightBarButtonItem = nil
         detailView.navigationItem.leftBarButtonItem = leftItem
+        
     }
     
     func leftNaviBarItemActionForItemDetail() {

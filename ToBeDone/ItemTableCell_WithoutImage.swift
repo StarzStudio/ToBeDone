@@ -109,7 +109,7 @@ class ItemTableCell_WithoutImage: UITableViewCell {
         self.parentViewController?.present(alertController, animated: true, completion: nil)
         
         
-           }
+    }
 
 
 
@@ -125,17 +125,11 @@ class ItemTableCell_WithoutImage: UITableViewCell {
     // do all the pre setting
     override func awakeFromNib() {
         super.awakeFromNib()
-
         self.backgroundColor = UIColor.clear
         initShadowView();
         initTitle()
         initNote()
-       
-        
-        
         //setViewContent()
-        
-        
     }
     
     
